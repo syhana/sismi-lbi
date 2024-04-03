@@ -1,5 +1,5 @@
-import FormRegis from "../components/form/FormRegis"
-import Container from "../../components/Container"
+import FormRegis from "@mhsComponents/form/FormRegis"
+import Container from "@components/Container"
 
 export default function RegisMahasiswa() {
   return (

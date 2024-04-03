@@ -4,9 +4,8 @@
 
 :root {
   /* warna */
-
-  --color1: #574FF0;
-  --color2: #262830;
+  --color1: #435DC7;
+  --color2: #8AA0E5;
   --color3: #1A1B1F;
   --fontcol1: #333;
   --fontcol2: #969696;
@@ -15,22 +14,16 @@
   ;
 
   /* font size */
-
   /*
    0,25rem = 4px 
    0,5 rem = 8px
    1   rem = 16px 
    1.5 rem = 24px
    2   rem = 32px
-  
-
-   
-  
   */
 
 
   /* ukuran margin padding */
-
   --xss: 0.25rem;
   --xs: 0.5rem;
   --sm: 0.75rem;
@@ -44,7 +37,6 @@
 
   /* transisi */
   --trantition: all 0.3s ease-in-out;
-
   --mobile: 400px;
   --tab-min: 401px;
   --tab-max: px;
