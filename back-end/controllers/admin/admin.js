@@ -90,7 +90,7 @@ const logoutAdmin = async (req,res) => {
                 return res.status(401).json({ succes: false, message: "Tidak ada token atau sudah logout sebelumnya" });
             }
             
-            await modelToken.destroy({ where: {token}});
+            await modelTokenAdmin.destroy({ where: {token}});
         
             res.status(200).json({ success: true, message: 'Logout berhasil' });
         });        

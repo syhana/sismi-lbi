@@ -13,7 +13,7 @@ const role_asisten = sequelize.define('role_asisten', {
         type: DataTypes.STRING(100),
         allowNull: false
     },
-    creatd_at:{
+    created_at:{
         type: DataTypes.DATE,
         allowNull: false
     },
@@ -31,4 +31,4 @@ const role_asisten = sequelize.define('role_asisten', {
 role_asisten.hasMany(asisten, {foreignKey: 'id_role', as: 'dataAsisten'})
 asisten.belongsTo(role_asisten, {foreignKey: 'id_role', as: 'dataRole'})
 
-module.exp = role_asisten
+module.exports = role_asisten
