@@ -36,11 +36,11 @@ const kepala_lab = sequelize.define('kepala_lab', {
     updatedAt: 'updated_at'
 })
 
-kepala_lab.hasMany(disposisi_surat, {foreignKey: 'pemberi_disposisi',})
-disposisi_surat.belongsTo(kepala_lab, {foreignKey: 'pemberi_disposisi',})
+// kepala_lab.hasMany(disposisi_surat, {foreignKey: 'pemberi_disposisi',})
+// disposisi_surat.belongsTo(kepala_lab, {foreignKey: 'pemberi_disposisi',})
 
-kepala_lab.hasMany(disposisi_surat, {foreignKey: 'tujuan_disposisi',})
-disposisi_surat.belongsTo(kepala_lab, {foreignKey: 'tujuan_disposisi',})
+// kepala_lab.hasMany(disposisi_surat, {foreignKey: 'tujuan_disposisi',})
+// disposisi_surat.belongsTo(kepala_lab, {foreignKey: 'tujuan_disposisi',})
 
 kepala_lab.hasMany(token_kalab, {foreignKey: 'nip_kalab', as: 'dataToken'})
 token_kalab.belongsTo(kepala_lab, {foreignKey: 'nip_kalab',})

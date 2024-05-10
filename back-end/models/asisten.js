@@ -43,11 +43,11 @@ const asisten = sequelize.define('asisten', {
     updatedAt: 'updated_at'
 })
 
-asisten.hasMany(disposisi_surat, {foreignKey: 'pemberi_disposisi',})
-disposisi_surat.belongsTo(asisten, {foreignKey: 'pemberi_disposisi',})
+// asisten.hasMany(disposisi_surat, {foreignKey: 'pemberi_disposisi',})
+// disposisi_surat.belongsTo(asisten, {foreignKey: 'pemberi_disposisi',})
 
-asisten.hasMany(disposisi_surat, {foreignKey: 'tujuan_disposisi', })
-disposisi_surat.belongsTo(asisten, {foreignKey: 'tujuan_disposisi',})
+// asisten.hasMany(disposisi_surat, {foreignKey: 'tujuan_disposisi', })
+// disposisi_surat.belongsTo(asisten, {foreignKey: 'tujuan_disposisi',})
 
 asisten.hasMany(surat_keluar, {foreignKey: 'id_asisten',})
 surat_keluar.belongsTo(asisten, {foreignKey: 'id_asisten',})
@@ -57,5 +57,8 @@ surat_masuk.belongsTo(asisten, {foreignKey: 'id_asisten',})
 
 asisten.hasMany(token_asisten, {foreignKey: 'id_asisten',})
 token_asisten.belongsTo(asisten, {foreignKey: 'id_asisten',})
+
+asisten.hasMany(disposisi_surat, {foreignKey: 'pemberi_disposisi_asisten', as: 'dataDisposisiAsisten'})
+disposisi_surat.belongsTo(asisten, {foreignKey: 'pemberi_disposisi_asisten', as: 'dataDisposisi'})
 
 module.exports = asisten

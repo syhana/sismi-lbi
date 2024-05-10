@@ -60,7 +60,7 @@ const verifyTokenAsisten = (req, res, next) => {
 
         const token = authHeader.split(' ')[1];
     
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, admin) => {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, asisten) => {
             if (err) {
                 console.error(err);
                 return res.status(401).json({ success: false, message: err });
@@ -76,7 +76,7 @@ const verifyTokenAsisten = (req, res, next) => {
             if (tanggal > adaToken.expires_at) {
                 return res.status(400).json({success: false, message: 'Token Sudah Kadaluarsa'})
             } else {
-                req.admin = admin;
+                req.asisten = asisten;
                 next();
             }
         });
@@ -103,7 +103,7 @@ const verifyTokenKalab = (req, res, next) => {
 
         const token = authHeader.split(' ')[1];
     
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, admin) => {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, kalab) => {
             if (err) {
                 console.error(err);
                 return res.status(401).json({ success: false, message: err });
@@ -119,7 +119,7 @@ const verifyTokenKalab = (req, res, next) => {
             if (tanggal > adaToken.expires_at) {
                 return res.status(400).json({success: false, message: 'Token Sudah Kadaluarsa'})
             } else {
-                req.admin = admin;
+                req.kalab = kalab;
                 next();
             }
         });
@@ -146,7 +146,7 @@ const verifyTokenMahasiswa = (req, res, next) => {
 
         const token = authHeader.split(' ')[1];
     
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, admin) => {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, mahasiswa) => {
             if (err) {
                 console.error(err);
                 return res.status(401).json({ success: false, message: err });
@@ -162,7 +162,7 @@ const verifyTokenMahasiswa = (req, res, next) => {
             if (tanggal > adaToken.expires_at) {
                 return res.status(400).json({success: false, message: 'Token Sudah Kadaluarsa'})
             } else {
-                req.admin = admin;
+                req.mahasiswa = mahasiswa;
                 next();
             }
         });

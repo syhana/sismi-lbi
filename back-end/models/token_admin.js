@@ -23,6 +23,10 @@ const token_admin = sequelize.define('token_admin', {
     updated_at:{
         type: DataTypes.DATE,
         allowNull: false
+    },
+    expires_at:{
+        type: DataTypes.DATE,
+        defaultValue: () => new Date(new Date().getTime() + (7 * 24 * 60 * 60 * 1000))
     }
 }, {
     tableName: 'token_admin',

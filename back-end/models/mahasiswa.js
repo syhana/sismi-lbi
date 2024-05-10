@@ -42,11 +42,11 @@ const mahasiswa = sequelize.define('mahasiswa', {
     updatedAt: 'updated_at'
 })
 
-mahasiswa.hasMany(disposisi_surat, {foreignKey: 'pemberi_disposisi', as: 'dataDisposisi'})
-disposisi_surat.belongsTo(mahasiswa, {foreignKey: 'pemberi_disposisi', as: 'dataMahasiswa'})
+// mahasiswa.hasMany(disposisi_surat, {foreignKey: 'pemberi_disposisi', as: 'dataDisposisiPemberi'})
+// disposisi_surat.belongsTo(mahasiswa, {foreignKey: 'pemberi_disposisi', as: 'dataMahasiswaPemberi'})
 
-mahasiswa.hasMany(disposisi_surat, {foreignKey: 'tujuan_disposisi', as: 'dataDisposisi'})
-disposisi_surat.belongsTo(mahasiswa, {foreignKey: 'tujuan_disposisi', as: 'dataMahasiswa'})
+// mahasiswa.hasMany(disposisi_surat, {foreignKey: 'tujuan_disposisi', as: 'dataDisposisiTujuan'})
+// disposisi_surat.belongsTo(mahasiswa, {foreignKey: 'tujuan_disposisi', as: 'dataMahasiswaTujuan'})
 
 mahasiswa.hasMany(generate_surat, {foreignKey: 'nim_mahasiswa', as: 'dataGenerate'})
 generate_surat.belongsTo(mahasiswa, {foreignKey: 'nim_mahasiswa', as: 'dataMahasiswa'})
@@ -56,5 +56,8 @@ surat_mahasiswa.belongsTo(mahasiswa, {foreignKey: 'nim_mahasiswa', as: 'dataMaha
 
 mahasiswa.hasMany(token_mahasiswa, {foreignKey: 'nim_mahasiswa', as: 'dataToken'})
 token_mahasiswa.belongsTo(mahasiswa, {foreignKey: 'nim_mahasiswa', as: 'dataMahasiswa'})
+
+mahasiswa.hasMany(disposisi_surat, {foreignKey: 'pemberi_disposisi_mahasiswa', as: 'dataDisposisiMahasiswa'})
+disposisi_surat.belongsTo(mahasiswa, {foreignKey: 'pemberi_disposisi_mahasiswa', as: 'dataDisposisiPemberi'})
 
 module.exports = mahasiswa

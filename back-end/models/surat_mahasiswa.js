@@ -17,6 +17,10 @@ const surat_mahasiswa = sequelize.define('surat_mahasiswa', {
         type: DataTypes.STRING(256),
         allowNull: false
     },
+    nama_surat_mahasiswa:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     created_at:{
         type: DataTypes.DATE,
         allowNull: false

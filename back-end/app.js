@@ -14,7 +14,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors())
+app.use('/fileSuratMahasiswa', express.static('public/doc/suratMahasiswa'))
+app.use('/ttd', express.static('public/images/ttd'))
+app.use(cors({
+  origin: 'http://localhost:5137'
+})) 
 
 app.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
@@ -26,10 +30,17 @@ app.use((err, req, res, next) => {
     next(err);
   }
 });
+
 app.use('/', server.admin)
 app.use('/', server.akunPengguna)
 app.use('/', server.barang)
 app.use('/', server.profileAdmin)
+app.use('/', server.mahasiswa)
+app.use('/', server.generateSurat)
+app.use('/', server.kelolaSuratMhs)
+app.use('/', server.disposisiMhs)
+app.use('/', server.profileMhs)
+
 
 
 // catch 404 and forward to error handler

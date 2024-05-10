@@ -16,17 +16,21 @@ const disposisi_surat = sequelize.define('disposisi_surat', {
         type: DataTypes.UUID,
         allowNull: true
     },
-    pemberi_disposisi:{
-        type: DataTypes.UUID,
-        allowNull: false
-    },
     tujuan_disposisi:{
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         allowNull: false
     },
     status_disposisi:{
         type: DataTypes.STRING(100),
         allowNull: false
+    },
+    pemberi_disposisi_mahasiswa:{
+        type: DataTypes.CHAR(36),
+        allowNull: true
+    },
+    pemberi_disposisi_asisten:{
+        type: DataTypes.CHAR(36),
+        allowNull: true
     },
     created_at:{
         type: DataTypes.DATE,
