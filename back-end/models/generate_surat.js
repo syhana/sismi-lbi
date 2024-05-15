@@ -6,10 +6,15 @@ const generate_surat = sequelize.define('generate_surat', {
     id_generate:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     id_jenis:{
         type: DataTypes.UUID,
+        allowNull: false
+    },
+    nim_mahasiswa:{
+        type: DataTypes.CHAR(36),
         allowNull: false
     },
     nama_generate:{

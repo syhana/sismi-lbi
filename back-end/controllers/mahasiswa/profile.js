@@ -1,6 +1,7 @@
 const modelMahasiswa = require('../../models/mahasiswa')
 const multer = require('multer')
 const path = require('path')
+const bcrypt = require('bcrypt')
 
 const storage = multer.diskStorage({
     destination: function(req,file, cb){
@@ -11,14 +12,14 @@ const storage = multer.diskStorage({
     }
 })
 
-const fileFilter = function(req,file, cb){
-    const allowedTypes = ['image/jpg', 'image/png']
+const fileFilter = function(req, file, cb) {
+    const allowedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
     if (!allowedTypes.includes(file.mimetype)) {
-        const error = new multer.MulterError('Jenis File Tidak Di izinkan, Hanya PDF yg Di izinkan');
-        error.message = 'Jenis File Tidak Di izinkan, Hanya PDF yg Di izinan'
+        const error = new multer.MulterError('LIMIT_UNEXPECTED_FILE');
+        error.message = 'Jenis file tidak diizinkan, hanya file JPG dan PNG yang diizinkan';
         return cb(error, false);
     }
-    cb(null,true)
+    cb(null, true);
 }
 
 const upload = multer({
@@ -57,7 +58,75 @@ const editAkun = async (req,res) => {
         const {nama_mahasiswa, alamat_mahasiswa, password_lama, password_baru} = req.body
         const ttd_mahasiswa = req.file
         if (ttd_mahasiswa) {
-            
+            if (password_baru) {
+                if (!password_lama) {
+                    return res.status(400).json({success: false, message: 'Silahkan isikan password lama anda'})
+                }
+                const salt = bcrypt.genSaltSync(10)
+                const hashedPass = bcrypt.hashSync(password_baru, salt)
+
+                bcrypt.compare(password_lama, findAKun.nama_mahasiswa, async function(err, results) {
+                    if (err || !results) {
+                        return res.status(400).json({success: false, message: 'Password lama akun anda salah'})
+                    }
+                    await modelMahasiswa.update({
+                        nama_mahasiswa: nama_mahasiswa || findAKun.nama_mahasiswa,
+                        password_mahasiswa: hashedPass,
+                        alamat_mahasiswa: alamat_mahasiswa || findAKun.alamat_mahasiswa,
+                        ttd_mahasiswa: ttd_mahasiswa.originalname
+                    }, {
+                        where:{
+                            nim_mahasiswa: nim_mahasiswa
+                        }
+                    })
+                    return res.status(200).json({success: true, message: 'Data akun anda berhasil diperbaharui'})
+                })
+            } else {
+                await modelMahasiswa.update({
+                    nama_mahasiswa: nama_mahasiswa || findAKun.nama_mahasiswa,
+                    alamat_mahasiswa: alamat_mahasiswa || findAKun.alamat_mahasiswa,
+                    ttd_mahasiswa: ttd_mahasiswa.originalname
+                }, {
+                    where:{
+                        nim_mahasiswa: nim_mahasiswa
+                    }
+                })
+                return res.status(200).json({success: true , message: 'Data akun anda berhasil diperbaharui'})
+            }
+        } else {
+            if (password_baru) {
+                if (!password_lama) {
+                    return res.status(400).json({success: false, message: 'Silahkan isikan password lama akun anda'})
+                }
+                const salt = bcrypt.genSaltSync(10)
+                const hashedPass = bcrypt.hashSync(password_baru, salt)
+
+                bcrypt.compare(password_lama, findAKun.nama_mahasiswa, async function(err, results) {
+                    if (err || !results) {
+                        return res.status(400).json({success: false, message: 'Password lama akun anda salah'})
+                    }
+                    await modelMahasiswa.update({
+                        nama_mahasiswa: nama_mahasiswa || findAKun.nama_mahasiswa,
+                        password_mahasiswa: hashedPass,
+                        alamat_mahasiswa: alamat_mahasiswa || findAKun.alamat_mahasiswa,
+                    }, {
+                        where:{
+                            nim_mahasiswa: nim_mahasiswa
+                        }
+                    })
+                    return res.status(200).json({success: true, message: 'Data akun anda berhasil diperbaharui'})
+                })
+            } else {
+                await modelMahasiswa.update({
+                    nama_mahasiswa: nama_mahasiswa || findAKun.nama_mahasiswa,
+                    alamat_mahasiswa: alamat_mahasiswa || findAKun.alamat_mahasiswa,
+                }, {
+                    where:{
+                        nim_mahasiswa: nim_mahasiswa
+                    }
+                })
+                return res.status(200).json({success: true , message: 'Data akun anda berhasil diperbaharui'})
+            }
         }
     } catch (error) {
         console.log(error)
@@ -66,4 +135,4 @@ const editAkun = async (req,res) => {
 
 }
 
-module.exports = {detailAkun}
+module.exports = {detailAkun, uploadd, editAkun}
