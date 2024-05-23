@@ -8,6 +8,10 @@ const surat_keluar = sequelize.define('surat_keluar', {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4
     },
+    no_surat_masuk:{
+        type: DataTypes.UUID,
+        allowNull: true
+    },
     id_asisten:{
         type: DataTypes.UUID,
         allowNull: false,

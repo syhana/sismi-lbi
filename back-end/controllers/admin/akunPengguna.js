@@ -32,10 +32,10 @@ const storage = multer.diskStorage({
 })
 
 const fileFilter = function(req,file, cb){
-    const allowedTypes = ['image/jpeg', 'image/png']
+    const allowedTypes = ['image/png']
     if (!allowedTypes.includes(file.mimetype)) {
-        const error = new multer.MulterError('Jenis File Tidak Di izinkan, Hanya JPEG dan PNG yg Di izinkan');
-        error.message = 'Jenis File Tidak Di izinkan, Hanya JPEG dan PNG yg Di izinkan'
+        const error = new multer.MulterError('Jenis File Tidak Di izinkan, Hanya  PNG yg Di izinkan');
+        error.message = 'Jenis File Tidak Di izinkan, Hanya PNG yg Di izinkan'
         return cb(error, false);
     }
     cb(null,true)

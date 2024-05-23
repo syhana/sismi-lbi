@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/fileSuratMahasiswa', express.static('public/doc/suratMahasiswa'))
+app.use('/fileSuratMasuk', express.static('public/Asisten/suratMasuk'))
+app.use('/fileSuratKeluar', express.static('public/Asisten/suratKeluar'))
 app.use('/ttd', express.static('public/images/ttd'))
 app.use(cors({
   origin: 'http://localhost:5137'
@@ -40,6 +42,15 @@ app.use('/', server.generateSurat)
 app.use('/', server.kelolaSuratMhs)
 app.use('/', server.disposisiMhs)
 app.use('/', server.profileMhs)
+app.use('/', server.asisten)
+app.use('/', server.suratMasukAsisten)
+app.use('/', server.suratKeluarAsisten)
+app.use('/', server.disposisiSuratAsisten)
+app.use('/', server.myDisposisi)
+app.use('/', server.profileAsisten)
+app.use('/', server.DisposisiKordas)
+app.use('/', server.kalab)
+app.use('/', server.disposisiKalab)
 
 
 

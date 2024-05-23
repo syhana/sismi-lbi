@@ -1,7 +1,24 @@
-const modelMahasiswa = require('../../models/mahasiswa')
+const modelAsisten = require('../../models/asisten')
 const multer = require('multer')
 const path = require('path')
 const bcrypt = require('bcrypt')
+
+//detail akun
+const detailAkun = async (req,res) => {
+    try {
+        const id_asisten = req.asisten.id_asisten
+        const findAkun = await modelAsisten.findByPk(id_asisten, {
+            attributes:['nama_asisten', 'ttd_asisten']
+        })
+        if (!findAkun) {
+            return res.status(400).json({success: false, message: 'Akun tidak ditemukan'})
+        }
+        return res.status(200).json({success:true, message: 'Akun ditemukan', data: findAkun})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({success: false, message: 'Kesalahan Server'})
+    }
+}
 
 const storage = multer.diskStorage({
     destination: function(req,file, cb){
@@ -29,35 +46,17 @@ const upload = multer({
 
 const uploadd = upload.single('file')
 
-//detail akun
-const detailAkun = async (req,res) => {
+//update akun
+const updateAkun = async(req,res) => {
     try {
-        
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({success: false, message: 'Kesalahan Server'})
-    }
-    const nim_mahasiswa = req.mahasiswa.nim_mahasiswa
-    const findAkun = await modelMahasiswa.findByPk(nim_mahasiswa, {
-        attributes: ['nim_mahasiswa', 'nama_mahasiswa', 'alamat_mahasiswa', 'ttd_mahasiswa']
-    })
-    if (!findAkun) {
-        return res.status(400).json({success: false, message: 'Akun anda tidak ditemukan'})
-    }
-    return res.status(200).json({success: true, message: 'Data akun ditemukan', data: findAkun})
-}
-
-//edit akun
-const editAkun = async (req,res) => {
-    try {
-        const nim_mahasiswa = req.mahasiswa.nim_mahasiswa
-        const findAKun = await modelMahasiswa.findByPk(nim_mahasiswa)
+        const id_asisten = req.asisten.id_asisten
+        const findAKun = await modelAsisten.findByPk(id_asisten)
         if (!findAKun) {
             return res.status(400).json({success: false, message: 'Akun anda tidak ditemukan'})
         }
-        const {nama_mahasiswa, alamat_mahasiswa, password_lama, password_baru} = req.body
-        const ttd_mahasiswa = req.file
-        if (ttd_mahasiswa) {
+        const {nama_asisten, password_lama, password_baru} = req.body
+        const ttd_asisten = req.file
+        if (ttd_asisten) {
             if (password_baru) {
                 if (!password_lama) {
                     return res.status(400).json({success: false, message: 'Silahkan isikan password lama anda'})
@@ -65,30 +64,28 @@ const editAkun = async (req,res) => {
                 const salt = bcrypt.genSaltSync(10)
                 const hashedPass = bcrypt.hashSync(password_baru, salt)
 
-                bcrypt.compare(password_lama, findAKun.password_mahasiswa, async function(err, results) {
+                bcrypt.compare(password_lama, findAKun.password_asisten, async function(err, results) {
                     if (err || !results) {
                         return res.status(400).json({success: false, message: 'Password lama akun anda salah'})
                     }
-                    await modelMahasiswa.update({
-                        nama_mahasiswa: nama_mahasiswa || findAKun.nama_mahasiswa,
-                        password_mahasiswa: hashedPass,
-                        alamat_mahasiswa: alamat_mahasiswa || findAKun.alamat_mahasiswa,
-                        ttd_mahasiswa: ttd_mahasiswa.originalname
+                    await modelAsisten.update({
+                        nama_asisten: nama_asisten || findAKun.nama_asisten,
+                        password_asisten: hashedPass,
+                        ttd_asisten: ttd_asisten.originalname
                     }, {
                         where:{
-                            nim_mahasiswa: nim_mahasiswa
+                            id_asisten: id_asisten
                         }
                     })
                     return res.status(200).json({success: true, message: 'Data akun anda berhasil diperbaharui'})
                 })
             } else {
-                await modelMahasiswa.update({
-                    nama_mahasiswa: nama_mahasiswa || findAKun.nama_mahasiswa,
-                    alamat_mahasiswa: alamat_mahasiswa || findAKun.alamat_mahasiswa,
-                    ttd_mahasiswa: ttd_mahasiswa.originalname
+                await modelAsisten.update({
+                    nama_asisten: nama_asisten || findAKun.nama_asisten,
+                    ttd_asisten: ttd_asisten.originalname
                 }, {
                     where:{
-                        nim_mahasiswa: nim_mahasiswa
+                        id_asisten: id_asisten
                     }
                 })
                 return res.status(200).json({success: true , message: 'Data akun anda berhasil diperbaharui'})
@@ -101,28 +98,26 @@ const editAkun = async (req,res) => {
                 const salt = bcrypt.genSaltSync(10)
                 const hashedPass = bcrypt.hashSync(password_baru, salt)
 
-                bcrypt.compare(password_lama, findAKun.nama_mahasiswa, async function(err, results) {
+                bcrypt.compare(password_lama, findAKun.password_asisten, async function(err, results) {
                     if (err || !results) {
                         return res.status(400).json({success: false, message: 'Password lama akun anda salah'})
                     }
-                    await modelMahasiswa.update({
-                        nama_mahasiswa: nama_mahasiswa || findAKun.nama_mahasiswa,
-                        password_mahasiswa: hashedPass,
-                        alamat_mahasiswa: alamat_mahasiswa || findAKun.alamat_mahasiswa,
+                    await modelAsisten.update({
+                        nama_asisten: nama_asisten || findAKun.nama_asisten,
+                        password_asisten: hashedPass,
                     }, {
                         where:{
-                            nim_mahasiswa: nim_mahasiswa
+                            id_asisten: id_asisten
                         }
                     })
                     return res.status(200).json({success: true, message: 'Data akun anda berhasil diperbaharui'})
                 })
             } else {
-                await modelMahasiswa.update({
-                    nama_mahasiswa: nama_mahasiswa || findAKun.nama_mahasiswa,
-                    alamat_mahasiswa: alamat_mahasiswa || findAKun.alamat_mahasiswa,
+                await modelAsisten.update({
+                    nama_asisten: nama_asisten || findAKun.nama_asisten,
                 }, {
                     where:{
-                        nim_mahasiswa: nim_mahasiswa
+                        id_asisten: id_asisten
                     }
                 })
                 return res.status(200).json({success: true , message: 'Data akun anda berhasil diperbaharui'})
@@ -130,9 +125,8 @@ const editAkun = async (req,res) => {
         }
     } catch (error) {
         console.log(error)
-        return res.status(500).json({success: false , message: 'Kesalahan Server'})
+        return res.status(500).json({success: false, message: 'Kesalahan Server'})
     }
-
 }
 
-module.exports = {detailAkun, uploadd, editAkun}
+module.exports = {detailAkun, uploadd, updateAkun}
