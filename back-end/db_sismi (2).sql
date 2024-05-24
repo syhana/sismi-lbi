@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2024 at 07:33 PM
+-- Generation Time: May 24, 2024 at 05:31 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -63,8 +63,8 @@ CREATE TABLE `asisten` (
 --
 
 INSERT INTO `asisten` (`id_asisten`, `nama_asisten`, `password_asisten`, `ttd_asisten`, `id_role`, `created_at`, `updated_at`) VALUES
-('84f26ff2-807f-4622-a39a-f942e38ec386', 'dila', '$2b$10$n9RBJDjv8dXngfJm9/8VeOmjwdk..lH0YVqD4UtlMDy48NDZif9ui', 'DW Supermarket Sales (1).jpg', '2e976dbf-ea26-4fa7-8eba-892ad192fae7', '2024-05-07 23:24:39', '2024-05-07 23:24:39'),
-('f9cad2db-25b9-4fc3-a984-1f22dbca874e', 'dila baru', '$2b$10$KPoc9OZ5YmPBvMUfkfVtEuWqKUUWV2wqlifgebydCG8V45k0kcxqe', 'codeee.png', 'c51a40e2-4e21-481d-85b8-897be45ec15d', '2024-04-04 21:52:16', '2024-04-04 21:53:28');
+('84f26ff2-807f-4622-a39a-f942e38ec386', 'dila baru stelah di edit', '$2b$10$32UR1Mmq2WH6Cf3oCs6NNOWeuwKZxnMmt5S27KSsIPqYNMa0wJQ4K', 'Nadini 1.jpg', '2e976dbf-ea26-4fa7-8eba-892ad192fae7', '2024-05-07 23:24:39', '2024-05-23 19:17:56'),
+('f9cad2db-25b9-4fc3-a984-1f22dbca874e', 'dila aja', '$2b$10$5bHf7ZYw9vHTAamf3Zo0KuB8pUDfutmJqcnnayKuI1eatAdXbd1qS', 'codeee.png', 'c51a40e2-4e21-481d-85b8-897be45ec15d', '2024-04-04 21:52:16', '2024-05-24 00:08:10');
 
 -- --------------------------------------------------------
 
@@ -119,7 +119,7 @@ INSERT INTO `detail_generate_surat` (`id_detail_generate`, `id_generate`, `id_ba
 CREATE TABLE `disposisi_surat` (
   `id_disposisi` char(36) NOT NULL,
   `id_surat_mahasiswa` char(36) DEFAULT NULL,
-  `no_surat_masuk` char(36) DEFAULT NULL,
+  `no_surat_keluar` char(36) DEFAULT NULL,
   `status_disposisi` varchar(100) NOT NULL,
   `tujuan_disposisi` varchar(36) NOT NULL,
   `pemberi_disposisi_mahasiswa` char(36) DEFAULT NULL,
@@ -132,8 +132,10 @@ CREATE TABLE `disposisi_surat` (
 -- Dumping data for table `disposisi_surat`
 --
 
-INSERT INTO `disposisi_surat` (`id_disposisi`, `id_surat_mahasiswa`, `no_surat_masuk`, `status_disposisi`, `tujuan_disposisi`, `pemberi_disposisi_mahasiswa`, `pemberi_disposisi_asisten`, `created_at`, `updated_at`) VALUES
-('b4881e84-59ab-4ad2-8531-43ae96a46b93', 'c3858bb4-b804-4397-99ef-ec5a62f704d4', NULL, 'menunggu', 'kepala laboratorium', '2111522021', NULL, '2024-05-11 00:19:25', '2024-05-11 00:28:57');
+INSERT INTO `disposisi_surat` (`id_disposisi`, `id_surat_mahasiswa`, `no_surat_keluar`, `status_disposisi`, `tujuan_disposisi`, `pemberi_disposisi_mahasiswa`, `pemberi_disposisi_asisten`, `created_at`, `updated_at`) VALUES
+('5ca5e0d8-9b28-40d7-947f-3477261288dc', NULL, 'ec8137e4-5da4-414d-8ef4-7b9abf3ab2fa', 'TTD Kalab', 'Koordinator Asisten', NULL, '84f26ff2-807f-4622-a39a-f942e38ec386', '2024-05-24 21:12:30', '2024-05-24 21:25:24'),
+('8126c5f2-b694-4ab5-b963-aba011f634e0', NULL, NULL, 'selesai', 'Koordinator Asisten', NULL, '84f26ff2-807f-4622-a39a-f942e38ec386', '2024-05-23 22:45:37', '2024-05-24 15:59:28'),
+('b4881e84-59ab-4ad2-8531-43ae96a46b93', 'c3858bb4-b804-4397-99ef-ec5a62f704d4', NULL, 'selesai', 'kepala laboratorium', '2111522021', NULL, '2024-05-11 00:19:25', '2024-05-24 16:03:09');
 
 -- --------------------------------------------------------
 
@@ -208,7 +210,7 @@ CREATE TABLE `kepala_lab` (
 --
 
 INSERT INTO `kepala_lab` (`nip_kalab`, `nama_kalab`, `password_kalab`, `ttd_kalab`, `created_at`, `updated_at`) VALUES
-('12345', 'dini baru', '$2b$10$SJQ0YIlelw/cN6Vgd.a/zenUOvz3vCltwwFcXiaLSw8cZGP/5b7E6', 'codeee.png', '2024-04-04 08:11:26', '2024-04-04 14:51:24');
+('12345', 'dini kalab', '$2b$10$3WL7Psyu05Pyo6zfYnpC5Ofyash2sxO.9YPvGVebgLPdvK2kq1r0q', 'codeee.png', '2024-04-04 08:11:26', '2024-05-24 15:25:22');
 
 -- --------------------------------------------------------
 
@@ -269,6 +271,13 @@ CREATE TABLE `surat_keluar` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `surat_keluar`
+--
+
+INSERT INTO `surat_keluar` (`no_surat_keluar`, `id_asisten`, `nama_surat_keluar`, `file_surat_keluar`, `created_at`, `updated_at`) VALUES
+('ec8137e4-5da4-414d-8ef4-7b9abf3ab2fa', '84f26ff2-807f-4622-a39a-f942e38ec386', 'surat keluar pertama', 'ilovepdf_merged (3).pdf', '2024-05-23 13:37:06', '2024-05-23 13:37:06');
+
 -- --------------------------------------------------------
 
 --
@@ -299,8 +308,8 @@ INSERT INTO `surat_mahasiswa` (`id_surat_mahasiswa`, `nim_mahasiswa`, `file_sura
 
 CREATE TABLE `surat_masuk` (
   `no_surat_masuk` char(36) NOT NULL,
+  `id_surat_mahasiswa` char(36) DEFAULT NULL,
   `id_asisten` char(36) NOT NULL,
-  `id_surat` char(36) NOT NULL,
   `nama_surat_masuk` varchar(256) NOT NULL,
   `file_surat_masuk` varchar(256) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -311,8 +320,10 @@ CREATE TABLE `surat_masuk` (
 -- Dumping data for table `surat_masuk`
 --
 
-INSERT INTO `surat_masuk` (`no_surat_masuk`, `id_asisten`, `id_surat`, `nama_surat_masuk`, `file_surat_masuk`, `created_at`, `updated_at`) VALUES
-('e79b433d-0bc7-11ef-b89d-e0d4643cc6a6', 'f9cad2db-25b9-4fc3-a984-1f22dbca874e', '12wewdfasfasf23423', 'surat adalah', 'ini adalah.pdf', '2024-05-06 23:44:28', '2024-05-06 23:44:28');
+INSERT INTO `surat_masuk` (`no_surat_masuk`, `id_surat_mahasiswa`, `id_asisten`, `nama_surat_masuk`, `file_surat_masuk`, `created_at`, `updated_at`) VALUES
+('69f15d57-88f3-4683-aee9-441ac40a71e9', NULL, '84f26ff2-807f-4622-a39a-f942e38ec386', 'ini surat masuk pertama', 'ilovepdf_merged (3).pdf', '2024-05-23 12:00:59', '2024-05-23 13:23:00'),
+('a4c03c7a-fd22-495b-9298-c79ea7246934', 'c3858bb4-b804-4397-99ef-ec5a62f704d4', '84f26ff2-807f-4622-a39a-f942e38ec386', 'ini adalah surat mahasiswa', '1916-5504-1-PB.pdf', '2024-05-24 16:03:09', '2024-05-24 16:03:09'),
+('d61306fa-2a25-4009-bb1c-9991db32631e', NULL, '84f26ff2-807f-4622-a39a-f942e38ec386', 'ini surat pertama masuk kedua', 'Acara_Nadini Annisa Byant (1).pdf', '2024-05-24 13:23:11', '2024-05-23 13:23:11');
 
 -- --------------------------------------------------------
 
@@ -357,6 +368,19 @@ CREATE TABLE `token_asisten` (
   `expires_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `token_asisten`
+--
+
+INSERT INTO `token_asisten` (`id_token`, `id_asisten`, `token`, `created_at`, `updated_at`, `expires_at`) VALUES
+('15de92f4-2fcf-4c75-a262-d2417279a093', 'f9cad2db-25b9-4fc3-a984-1f22dbca874e', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF9hc2lzdGVuIjoiZjljYWQyZGItMjViOS00ZmMzLWE5ODQtMWYyMmRiY2E4NzRlIiwiaWRfcm9sZSI6ImM1MWE0MGUyLTRlMjEtNDgxZC04NWI4LTg5N2JlNDVlYzE1ZCIsImlhdCI6MTcxNjQ4NDExMywiZXhwIjoxNzE3MDg4OTEzfQ.N7rLTcJRJ4Z-512RRzD36AeiZjE--EUqbKWsb-bpVEI', '2024-05-24', '2024-05-24', '0000-00-00'),
+('3cc2fcb5-1b8d-4790-bf87-808661641196', '84f26ff2-807f-4622-a39a-f942e38ec386', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF9hc2lzdGVuIjoiODRmMjZmZjItODA3Zi00NjIyLWEzOWEtZjk0MmUzOGVjMzg2IiwiaWRfcm9sZSI6IjJlOTc2ZGJmLWVhMjYtNGZhNy04ZWJhLTg5MmFkMTkyZmFlNyIsImlhdCI6MTcxNjQzOTM4MCwiZXhwIjoxNzE3MDQ0MTgwfQ.1LPLO4-2ip2H9KfgDjPnPfDgVE6Ujwx-jEyiNFZOajs', '2024-05-23', '2024-05-23', '0000-00-00'),
+('3e9929e8-57f3-4059-8b02-fc8480521325', '84f26ff2-807f-4622-a39a-f942e38ec386', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF9hc2lzdGVuIjoiODRmMjZmZjItODA3Zi00NjIyLWEzOWEtZjk0MmUzOGVjMzg2IiwiaWF0IjoxNzE2NDM0NDE3LCJleHAiOjE3MTcwMzkyMTd9.qzLC79mTBc6BeoNrn30PqgfB7LBMSFreaA99UT2suGs', '2024-05-23', '2024-05-23', '0000-00-00'),
+('bebc9a16-20fa-4bab-8e9e-2169deef6c71', 'f9cad2db-25b9-4fc3-a984-1f22dbca874e', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF9hc2lzdGVuIjoiZjljYWQyZGItMjViOS00ZmMzLWE5ODQtMWYyMmRiY2E4NzRlIiwiaWRfcm9sZSI6ImM1MWE0MGUyLTRlMjEtNDgxZC04NWI4LTg5N2JlNDVlYzE1ZCIsImlhdCI6MTcxNjQ4Mzk5MiwiZXhwIjoxNzE3MDg4NzkyfQ.5JJzZ7BXDW7kUvXUE2wZvvhE1JjcsB7O_-gS8uSNbls', '2024-05-24', '2024-05-24', '0000-00-00'),
+('c4324623-a8a8-42d3-8d0c-70adaa29f9b6', '84f26ff2-807f-4622-a39a-f942e38ec386', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF9hc2lzdGVuIjoiODRmMjZmZjItODA3Zi00NjIyLWEzOWEtZjk0MmUzOGVjMzg2IiwiaWRfcm9sZSI6IjJlOTc2ZGJmLWVhMjYtNGZhNy04ZWJhLTg5MmFkMTkyZmFlNyIsImlhdCI6MTcxNjQzNjAxNywiZXhwIjoxNzE3MDQwODE3fQ.PrZLBO-zrISUm_rbOLSa-WuvD5h8svDr6emznD5el4A', '2024-05-23', '2024-05-23', '0000-00-00'),
+('cf2f9a3e-3545-4aa9-aecc-2aba3f896a7f', 'f9cad2db-25b9-4fc3-a984-1f22dbca874e', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF9hc2lzdGVuIjoiZjljYWQyZGItMjViOS00ZmMzLWE5ODQtMWYyMmRiY2E4NzRlIiwiaWRfcm9sZSI6ImM1MWE0MGUyLTRlMjEtNDgxZC04NWI4LTg5N2JlNDVlYzE1ZCIsImlhdCI6MTcxNjQzNjgwMSwiZXhwIjoxNzE3MDQxNjAxfQ.BJQeP_Td53plzwTsYVL2N49jYjy9eeTkjqAkWu9XtSQ', '2024-05-23', '2024-05-23', '0000-00-00'),
+('dcd58940-ec30-4a01-bd52-c3ef19741ada', 'f9cad2db-25b9-4fc3-a984-1f22dbca874e', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF9hc2lzdGVuIjoiZjljYWQyZGItMjViOS00ZmMzLWE5ODQtMWYyMmRiY2E4NzRlIiwiaWRfcm9sZSI6ImM1MWE0MGUyLTRlMjEtNDgxZC04NWI4LTg5N2JlNDVlYzE1ZCIsImlhdCI6MTcxNjQ2OTE0MiwiZXhwIjoxNzE3MDczOTQyfQ.OX_MCR7EfL0bthDJO38r8uV15P1hooe5C-4vSk7Wcwk', '2024-05-23', '2024-05-23', '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
@@ -371,6 +395,14 @@ CREATE TABLE `token_kalab` (
   `updated_at` date NOT NULL,
   `expires_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `token_kalab`
+--
+
+INSERT INTO `token_kalab` (`id_token`, `nip_kalab`, `token`, `created_at`, `updated_at`, `expires_at`) VALUES
+('d7a96042-dbd3-422b-8500-967713732894', '12345', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXBfa2FsYWIiOiIxMjM0NSIsImlhdCI6MTcxNjQ4NTQ3NywiZXhwIjoxNzE3MDkwMjc3fQ.Oau5CocsAwWIXaZju4UJEcSO8UGPa3zwWDYPmzFSvS8', '2024-05-23 17:31:17', '2024-05-24', '2024-05-23 17:31:17'),
+('d8d51808-c212-4f10-9f83-b6b5a29ce666', '12345', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaXBfa2FsYWIiOiIxMjM0NSIsImlhdCI6MTcxNjU2NDMzOSwiZXhwIjoxNzE3MTY5MTM5fQ.CHaxD8pyy3RSCRbcP3CxIF0eoXqWZAlJBhcsvmmV9xw', '2024-05-24 15:25:39', '2024-05-24', '2024-05-24 15:25:39');
 
 -- --------------------------------------------------------
 
@@ -432,10 +464,10 @@ ALTER TABLE `detail_generate_surat`
 ALTER TABLE `disposisi_surat`
   ADD PRIMARY KEY (`id_disposisi`),
   ADD KEY `id_surat_mahasiswa` (`id_surat_mahasiswa`),
-  ADD KEY `no_surat_masuk` (`no_surat_masuk`),
   ADD KEY `pemberi_disposisi` (`tujuan_disposisi`),
   ADD KEY `pemberi_disposisi_mahasiswa` (`pemberi_disposisi_mahasiswa`,`pemberi_disposisi_asisten`),
-  ADD KEY `pemberi_disposisi_asisten` (`pemberi_disposisi_asisten`);
+  ADD KEY `pemberi_disposisi_asisten` (`pemberi_disposisi_asisten`),
+  ADD KEY `no_surat_keluar` (`no_surat_keluar`);
 
 --
 -- Indexes for table `generate_surat`
@@ -488,7 +520,8 @@ ALTER TABLE `surat_mahasiswa`
 --
 ALTER TABLE `surat_masuk`
   ADD PRIMARY KEY (`no_surat_masuk`),
-  ADD KEY `id_asisten` (`id_asisten`);
+  ADD KEY `id_asisten` (`id_asisten`),
+  ADD KEY `id_surat_mahasiswa` (`id_surat_mahasiswa`);
 
 --
 -- Indexes for table `token_admin`
@@ -550,9 +583,9 @@ ALTER TABLE `detail_generate_surat`
 --
 ALTER TABLE `disposisi_surat`
   ADD CONSTRAINT `disposisi_surat_ibfk_1` FOREIGN KEY (`id_surat_mahasiswa`) REFERENCES `surat_mahasiswa` (`id_surat_mahasiswa`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `disposisi_surat_ibfk_2` FOREIGN KEY (`no_surat_masuk`) REFERENCES `surat_masuk` (`no_surat_masuk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `disposisi_surat_ibfk_3` FOREIGN KEY (`pemberi_disposisi_asisten`) REFERENCES `asisten` (`id_asisten`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `disposisi_surat_ibfk_4` FOREIGN KEY (`pemberi_disposisi_mahasiswa`) REFERENCES `mahasiswa` (`nim_mahasiswa`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `disposisi_surat_ibfk_4` FOREIGN KEY (`pemberi_disposisi_mahasiswa`) REFERENCES `mahasiswa` (`nim_mahasiswa`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `disposisi_surat_ibfk_5` FOREIGN KEY (`pemberi_disposisi_asisten`) REFERENCES `asisten` (`id_asisten`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `disposisi_surat_ibfk_6` FOREIGN KEY (`no_surat_keluar`) REFERENCES `surat_keluar` (`no_surat_keluar`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `generate_surat`
@@ -577,7 +610,8 @@ ALTER TABLE `surat_mahasiswa`
 -- Constraints for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
-  ADD CONSTRAINT `surat_masuk_ibfk_1` FOREIGN KEY (`id_asisten`) REFERENCES `asisten` (`id_asisten`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `surat_masuk_ibfk_1` FOREIGN KEY (`id_asisten`) REFERENCES `asisten` (`id_asisten`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `surat_masuk_ibfk_2` FOREIGN KEY (`id_surat_mahasiswa`) REFERENCES `surat_mahasiswa` (`id_surat_mahasiswa`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `token_admin`
