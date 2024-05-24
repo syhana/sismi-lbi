@@ -51,6 +51,9 @@ app.use('/', server.profileAsisten)
 app.use('/', server.DisposisiKordas)
 app.use('/', server.kalab)
 app.use('/', server.disposisiKalab)
+app.use('/', server.laporanSuratMasuk)
+app.use('/', server.laporanSuratKeluar)
+app.use('/', server.profileKalab)
 
 
 

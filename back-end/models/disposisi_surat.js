@@ -12,7 +12,7 @@ const disposisi_surat = sequelize.define('disposisi_surat', {
         type: DataTypes.UUID,
         allowNull: true
     },
-    no_surat_masuk:{
+    no_surat_keluar:{
         type: DataTypes.UUID,
         allowNull: true
     },

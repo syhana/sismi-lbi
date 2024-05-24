@@ -1,23 +1,18 @@
 const { Op } = require('sequelize')
 const modelDisposisiSurat = require('../../models/disposisi_surat')
-const modelSuratMasuk = require('../../models/surat_masuk')
+const modelSuratKeluar = require('../../models/surat_keluar')
 
 
 //list surat masuk
-const dataSuratMasuk = async (req,res) => {
+const dataSuratKeluar = async (req,res) => {
     try {
-        const findSurat = await modelSuratMasuk.findAll({
-            where: {
-                id_asisten: {
-                    [Op.ne]: null
-                }
-            },
-            attributes: ['no_surat_masuk', 'nama_surat_masuk']
+        const findSurat = await modelSuratKeluar.findAll({
+            attributes: ['no_surat_keluar', 'nama_surat_keluar']
         })
         if (findSurat.length <= 0) {
-            return res.status(400).json({success: false, message: 'Data surat masuk belum tersedia'})
+            return res.status(400).json({success: false, message: 'Data surat keluar belum tersedia'})
         }
-        return res.status(200).json({success: true, message: 'Data surat masul tersedia', data: findSurat})
+        return res.status(200).json({success: true, message: 'Data surat keluar tersedia', data: findSurat})
     } catch (error) {
         console.log(error)
         return res.status(500).json({success: false, message: 'Kesalahan Server'})
@@ -28,13 +23,13 @@ const dataSuratMasuk = async (req,res) => {
 const tambahDisposisi = async (req,res) => {
     try {
         const id_asisten = req.asisten.id_asisten
-        const {no_surat_masuk, tujuan_disposisi} = req.body
-        if (!no_surat_masuk || !tujuan_disposisi) {
+        const {no_surat_keluar, tujuan_disposisi} = req.body
+        if (!no_surat_keluar || !tujuan_disposisi) {
             return res.status(400).json({success: false, message: 'Silahkan lengkapi data disposisi yang akan ditambahkan'})
         }
         const findDisposisi = await modelDisposisiSurat.findOne({
             where:{
-                no_surat_masuk: no_surat_masuk,
+                no_surat_keluar: no_surat_keluar,
                 tujuan_disposisi: tujuan_disposisi
             }
         })
@@ -42,7 +37,7 @@ const tambahDisposisi = async (req,res) => {
             return res.status(400).json({success: false, message: 'Surat dengan tujuan tersebut sudah pernah ditambahkan'})
         }
         await modelDisposisiSurat.create({
-            no_surat_masuk: no_surat_masuk,
+            no_surat_keluar: no_surat_keluar,
             tujuan_disposisi: tujuan_disposisi,
             status_disposisi: 'menunggu',
             pemberi_disposisi_asisten: id_asisten
@@ -62,12 +57,12 @@ const tampilDisposisi = async (req,res) => {
             where:{
                 pemberi_disposisi_asisten: id_asisten
             },
-            attributes: ['id_disposisi','tujuan_disposisi','no_surat_masuk', 'status_disposisi'],
+            attributes: ['id_disposisi','tujuan_disposisi','no_surat_keluar', 'status_disposisi'],
             include: [
                 {
-                    model: modelSuratMasuk,
-                    as: 'dataSurat',
-                    attributes: ['nama_surat_masuk']
+                    model: modelSuratKeluar,
+                    as: 'dataSuratKeluar',
+                    attributes: ['nama_surat_keluar']
                 }
             ]
         })
@@ -120,4 +115,4 @@ const hapusDisposisi = async (req,res) => {
     }
 }
 
-module.exports = {dataSuratMasuk, tambahDisposisi, tampilDisposisi, editDisposisi, hapusDisposisi}
+module.exports = {dataSuratKeluar, tambahDisposisi, tampilDisposisi, editDisposisi, hapusDisposisi}

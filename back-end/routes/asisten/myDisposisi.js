@@ -3,7 +3,7 @@ const router = express.Router()
 const middleware = require('../../middleware/authentication')
 const controllers = require('../../controllers/asisten/myDisposisi')
 
-router.get('/listSuratMasuk', middleware.verifyTokenAsisten, controllers.dataSuratMasuk)
+router.get('/listSuratKeluar', middleware.verifyTokenAsisten, controllers.dataSuratKeluar)
 router.post('/tambahMyDisposisi', middleware.verifyTokenAsisten, controllers.tambahDisposisi)
 router.get('/tampilMyDisposisi', middleware.verifyTokenAsisten, controllers.tampilDisposisi)
 router.post('/editMyDisposisi/:id_disposisi', middleware.verifyTokenAsisten, controllers.editDisposisi)

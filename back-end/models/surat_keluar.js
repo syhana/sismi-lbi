@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize')
 const sequelize = require('../config/db')
+const disposisi_surat = require('./disposisi_surat')
 
 const surat_keluar = sequelize.define('surat_keluar', {
     no_surat_keluar:{
@@ -7,10 +8,6 @@ const surat_keluar = sequelize.define('surat_keluar', {
         allowNull: false,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4
-    },
-    no_surat_masuk:{
-        type: DataTypes.UUID,
-        allowNull: true
     },
     id_asisten:{
         type: DataTypes.UUID,
@@ -38,5 +35,8 @@ const surat_keluar = sequelize.define('surat_keluar', {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 })
+
+surat_keluar.hasMany(disposisi_surat, {foreignKey: 'no_surat_keluar', as: 'dataDisposisi'})
+disposisi_surat.belongsTo(surat_keluar, {foreignKey: 'no_surat_keluar', as: 'dataSuratKeluar'})
 
 module.exports = surat_keluar

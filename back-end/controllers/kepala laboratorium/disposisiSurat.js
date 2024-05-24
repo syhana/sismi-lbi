@@ -1,7 +1,9 @@
 const modelDisposisiSurat = require('../../models/disposisi_surat')
 const modelSuratMahasiswa = require('../../models/surat_mahasiswa')
-const modelSuratMasuk = require('../../models/surat_masuk')
+const modelSuratKeluar = require('../../models/surat_keluar')
 const modelKalab = require('../../models/kepala_lab')
+const modelSuratMasuk = require('../../models/surat_masuk')
+const modelAsisten = require('../../models/asisten')
 const { Op } = require('sequelize')
 const path = require('path')
 const fs =require('fs')
@@ -17,7 +19,7 @@ const listDisposisi = async (req,res) => {
                     { status_disposisi: 'selesai' }
                 ]
             },
-            attributes: ['id_disposisi', 'id_surat_mahasiswa', 'no_surat_masuk', 'status_disposisi'],
+            attributes: ['id_disposisi', 'id_surat_mahasiswa', 'no_surat_keluar', 'status_disposisi'],
             include: [
                 {
                     model: modelSuratMahasiswa,
@@ -25,9 +27,9 @@ const listDisposisi = async (req,res) => {
                     attributes: ['file_surat_mahasiswa']
                 },
                 {
-                    model: modelSuratMasuk,
-                    as: 'dataSurat',
-                    attributes: ['file_surat_masuk']
+                    model: modelSuratKeluar,
+                    as: 'dataSuratKeluar',
+                    attributes: ['file_surat_keluar']
                 }
             ]
         })
@@ -53,12 +55,12 @@ const detailDisposisi = async (req,res) => {
                     attributes: ['file_surat_mahasiswa']
                 },
                 {
-                    model: modelSuratMasuk,
-                    as: 'dataSurat',
-                    attributes: ['file_surat_masuk']
+                    model: modelSuratKeluar,
+                    as: 'dataSuratKeluar',
+                    attributes: ['file_surat_keluar']
                 }
             ],
-            attributes: ['id_surat_mahasiswa', 'no_surat_masuk']
+            attributes: ['id_surat_mahasiswa', 'no_surat_keluar']
         })
         if (!findDisposisi) {
             return res.status(400).json({success: false, message: 'Data disposisi tidak ditemukan'})
@@ -84,15 +86,15 @@ const tandaTangan = async (req,res) => {
                 {
                     model: modelSuratMahasiswa,
                     as: 'dataSuratMhs',
-                    attributes: ['file_surat_mahasiswa']
+                    attributes: ['file_surat_mahasiswa', 'nama_surat_mahasiswa']
                 },
                 {
-                    model: modelSuratMasuk,
-                    as: 'dataSurat',
-                    attributes: ['file_surat_masuk']
+                    model: modelSuratKeluar,
+                    as: 'dataSuratKeluar',
+                    attributes: ['file_surat_keluar']
                 }
             ],
-            attributes: ['id_surat_mahasiswa', 'no_surat_masuk']
+            attributes: ['id_surat_mahasiswa', 'no_surat_keluar']
         })
         if (!findDisposisi) {
             return res.status(400).json({success: false, message: 'Data disposisi tidak ditemukan'})
@@ -108,8 +110,10 @@ const tandaTangan = async (req,res) => {
 
         if (findDisposisi.id_surat_mahasiswa != null) {
             pdfPath = path.join(__dirname, '../', '../', 'public', 'doc', 'suratMahasiswa', findDisposisi.dataSuratMhs.dataValues.file_surat_mahasiswa)
+        } else {
+            pdfPath = path.join(__dirname, '../', '../', 'public', 'doc', 'Asisten', 'suratKeluar', findDisposisi.dataSuratKeluar.dataValues.file_surat_keluar)
         }
-        pdfPath = path.join(__dirname, '../', '../', 'public', 'doc', 'Asisten', 'suratMasuk', findDisposisi.dataSurat.dataValues.file_surat_masuk)
+        
 
         const pdfbytes = fs.readFileSync(pdfPath)
 
@@ -128,12 +132,35 @@ const tandaTangan = async (req,res) => {
         const pdfUpdated = await pdfDoc.save()
         fs.writeFileSync(pdfPath, pdfUpdated)
         await modelDisposisiSurat.update({
-            status_disposisi: 'TTD Kalab'
+            status_disposisi: 'selesai'
         }, {
             where:{
                 id_disposisi: id_disposisi
             }
         })
+        if (findDisposisi.id_surat_mahasiswa != null) {
+            const findAllAsisten = await modelAsisten.findAll()
+            if (findAllAsisten.length === 0 ) {
+                return res.status(400).json({success: false, message:'Data asisten belum tersedia'})
+            }
+
+            const randomIndex = Math.floor(Math.random() * findAllAsisten.length)
+            const randomAsisten = findAllAsisten[randomIndex]
+
+            const fileName = findDisposisi.dataSuratMhs.dataValues.file_surat_mahasiswa
+            const pathAsal = path.join(__dirname, '../', '../', 'public', 'doc', 'suratMahasiswa', fileName)
+            const pathTujuan = path.join(__dirname, '../', '../', 'public', 'doc', 'Asisten', 'suratMasuk', fileName)
+
+            fs.copyFileSync(pathAsal, pathTujuan)
+
+            await modelSuratMasuk.create({
+                nama_surat_masuk: findDisposisi.dataSuratMhs.dataValues.nama_surat_mahasiswa,
+                id_surat_mahasiswa: findDisposisi.id_surat_mahasiswa,
+                id_asisten: randomAsisten.id_asisten,
+                file_surat_masuk: fileName
+            })
+        }
+        
         return res.status(200).json({success: true, message: 'Surat berhasil ditanda tangan'})
     } catch (error) {
         console.log(error)

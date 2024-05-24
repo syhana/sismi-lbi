@@ -16,6 +16,9 @@ const profileAsisten = require('./asisten/profile')
 const DisposisiKordas = require('./koordinator asisten/disposisiSurat')
 const kalab = require('./kepala laboratorium/kalab')
 const disposisiKalab = require('./kepala laboratorium/disposisiSurat')
+const laporanSuratMasuk = require('./kepala laboratorium/laporanSuratMasuk')
+const laporanSuratKeluar = require('./kepala laboratorium/laporanSuratKeluar')
+const profileKalab = require('./kepala laboratorium/profile')
 const server = {}
 
 server.admin = admin
@@ -36,6 +39,9 @@ server.profileAsisten = profileAsisten
 server.DisposisiKordas = DisposisiKordas
 server.kalab = kalab
 server.disposisiKalab = disposisiKalab
+server.laporanSuratMasuk = laporanSuratMasuk
+server.laporanSuratKeluar = laporanSuratKeluar
+server.profileKalab = profileKalab
 
 
 module.exports = server
