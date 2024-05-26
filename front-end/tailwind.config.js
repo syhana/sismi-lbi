@@ -6,30 +6,21 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        custom: {
-          100: "#435DC7",
-          200: "#8AA0E5",
-          300: "#1A1B1F",
-          400: "#333",
-          500: "#969696",
-          600: "#f9f9f9",
-          700: "#F10707",
-          800: "#EFEFEF"
+      colors:{
+        primary: '#1B2E5F',
+        secondary: '#435DC7',
+        complementary: '#B7B7B7',
+        biruComplement: '#C6DBF4',
+        linearBlue: {
+          start: '#435DC7', // Warna awal
+          end: '#E8ECFD', // Warna akhir
         },
       },
-      screens: {
-        'hp' : '475px',
-        'tablet': '640px',
-  
-        'laptop': '1024px',
-  
-        'desktop': '1280px',
-      },
+      // Atur background gradient menggunakan warna linear baru
+      backgroundImage: theme => ({
+        'blue-gradient': `linear-gradient(to bottom, ${theme('colors.linearBlue.start')}, ${theme('colors.linearBlue.end')})`,
+      }),
     },
   },
-  plugins: [
-    require('@tailwindcss/aspect-ratio'),
-  ],
+  plugins: [],
 }
-

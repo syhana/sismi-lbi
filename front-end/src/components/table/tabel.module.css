@@ -1,0 +1,161 @@
+@media screen and (max-width:678px) {
+    .layout {
+        margin-top: 2rem;
+    }
+
+    .action img {
+        width: 14px;
+    }
+
+    .aksi,
+    .nomor {
+        text-align: center;
+        background-color: var(--background-color2);
+        color: var(--primary-color);
+        font-weight: 600;
+        text-align: center;
+        font-size: 12px;
+        width: 16px;
+        padding: 12px 4px;
+    }
+
+    .action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    th {
+        width: 50px;
+        background-color: var(--background-color2);
+        text-align: left;
+        color: var(--primary-color);
+        font-size: 12px;
+
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .tbody tbody td,
+    td {
+        padding: 0.5rem 0;
+        text-align: left;
+        font-size: 12px;
+        border-bottom: 1px solid rgb(124, 124, 124);
+    }
+
+    .action button {
+        border: none;
+        background: none;
+        transition: var(--trantition);
+        -webkit-transition: var(--trantition);
+        -moz-transition: var(--trantition);
+        -ms-transition: var(--trantition);
+        -o-transition: var(--trantition);
+    }
+
+    .action button:active {
+        transform: scale(0.75);
+        -webkit-transform: scale(0.75);
+        -moz-transform: scale(0.75);
+        -ms-transform: scale(0.75);
+        -o-transform: scale(0.75);
+    }
+
+    tbody tr {
+        border-bottom: 1px solid rgba(18, 18, 18, 0.086);
+
+    }
+    .no {
+        text-align: center;
+    }
+
+}
+
+@media screen and (min-width:679px) {
+    .layout {
+        margin-top: 2rem;
+
+
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table thead .title {
+        background-color: var(--background-color2);
+        color: var(--primary-color);
+        font-weight: 600;
+        text-align: left;
+        font-size: 1rem;
+        padding: 1rem 1.5rem;
+
+    }
+
+    tbody tr {
+        border-bottom: 1px solid rgba(18, 18, 18, 0.086);
+
+    }
+
+    .tbody tbody td,
+    td {
+        padding: 1rem 1.5rem;
+        text-align: left;
+        border-bottom: 1px solid rgb(10, 9, 9);
+    }
+
+    .action button {
+        border: none;
+        background: none;
+        row-gap: 4px;
+        transition: var(--trantition);
+        -webkit-transition: var(--trantition);
+        -moz-transition: var(--trantition);
+        -ms-transition: var(--trantition);
+        -o-transition: var(--trantition);
+    }
+
+    .action button:active {
+        transform: scale(0.75);
+        -webkit-transform: scale(0.75);
+        -moz-transform: scale(0.75);
+        -ms-transform: scale(0.75);
+        -o-transform: scale(0.75);
+    }
+
+    .action {
+        display: flex;
+        column-gap: 0.5rem;
+
+    }
+
+    .no {
+        text-align: center;
+    }
+
+    .aksi,
+    .nomor {
+        width: 120px;
+        text-align: center;
+        background-color: var(--background-color2);
+        color: var(--primary-color);
+        font-weight: 600;
+        text-align: center;
+        font-size: 1rem;
+        padding: 1rem 1.5rem;
+    }
+
+    th {
+        background-color: var(--background-color2);
+        text-align: left;
+        color: var(--primary-color);
+        padding-left: 1.25rem;
+
+    }
+
+}
