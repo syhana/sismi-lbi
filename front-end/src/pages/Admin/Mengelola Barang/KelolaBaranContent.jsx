@@ -15,17 +15,17 @@ const columns = [
     { key: "action", label: "Aksi" },
 ];
 
-export default function AkunContent (){
+export default function KelolaBaranContent(){
     const navigate = useNavigate();
 
     const handleTambahDataClick = () => {
-        navigate("/admin/akunPengguna/tambah");
+        navigate("/admin/kelolaBarang/tambah");
     };
 
     return (
         <div className="p-10 ps-12">
             <div className="flex flex-col md:flex-row md:justify-between items-center">
-                <p className='text-primary font-semibold text-3xl mb-5 md:mb-0'>Akun Pengguna</p>
+                <p className='text-primary font-semibold text-3xl mb-5 md:mb-0'>Mengelola Barang</p>
                 <ButtonIcon
                     icon={'/public/icon/material-symbols--add.svg'}
                     label={'Tambah Data'}
@@ -34,7 +34,7 @@ export default function AkunContent (){
                     onClick={handleTambahDataClick}
                 />
             </div>
-            <Tabel bg_head={'bg-biruComplement'} className={'mt-10'} columns={columns} data={data} onEdit={`/admin/akunPengguna/edit`} onView={'/admin/akunPengguna/detail'} />
+            <Tabel bg_head={'bg-biruComplement'} className={'mt-10'} columns={columns} data={data} onEdit={'/admin/kelolaBarang/edit'} onView={'/admin/kelolaBarang/detail'} />
         </div>
     );
 }

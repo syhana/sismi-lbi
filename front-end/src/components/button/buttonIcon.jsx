@@ -12,7 +12,7 @@ export default function ButtonIcon ({ label, onClick, className, type, icon }){
             >
                 <div className="flex">
                     <img src={icon} alt="" className="pe-2"/>
-                    <p className="pe-2">{label}</p>
+                    <p className="pe-2 pt-1">{label}</p>
                 </div>
             </Button>
         </div>

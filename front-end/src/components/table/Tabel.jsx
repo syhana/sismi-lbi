@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TabelAction from "./tableAction";
 import AlertNotif from "../alert/AlertNotif";
 
-export default function Tabel({ className, data, columns, bg_head }) {
+export default function Tabel({ className, data, columns, bg_head, onView, onEdit}) {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false); 
     const [posisToDelete, setPosisToDelete] = useState(null); 
@@ -42,8 +42,8 @@ export default function Tabel({ className, data, columns, bg_head }) {
                             <td className="p-2">{row.role}</td>
                             <td className="p-2">
                                 <TabelAction
-                                    onView={() => navigate(`/admin/akunPengguna/detail`)}
-                                    onEdit={() => navigate(`/admin/akunPengguna/edit`)}
+                                    onView={() => navigate(`${onView}`)}
+                                    onEdit={() => navigate(`${onEdit}`)}
                                     onDelete={() => showDeleteConfirmation(row.id)}
                                 />
                             </td>

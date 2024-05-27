@@ -8,6 +8,10 @@ import TambahPengguna from './pages/Admin/Akun Pengguna/Tambah/TambahPengguna';
 import EditPengguna from './pages/Admin/Akun Pengguna/Edit/editPengguna';
 import DetailPengguna from './pages/Admin/Akun Pengguna/Detail/DetailPengguna';
 import KelolaBarang from './pages/Admin/Mengelola Barang/kelolaBarang';
+import TambahBarang from './pages/Admin/Mengelola Barang/Tambah/TambahBarang';
+import EditBarang from './pages/Admin/Mengelola Barang/Edit/EditBarang';
+import DetailBarang from './pages/Admin/Mengelola Barang/Detail/DetailBarang';
+import Profile from './pages/Admin/Profile/Profile';
 
 function App() {
 
@@ -23,6 +27,10 @@ function App() {
         <Route path='/admin/akunPengguna/detail' element={<DetailPengguna/>}/>
 
         <Route path='/admin/kelolaBarang' element={<KelolaBarang/>}/>
+        <Route path='/admin/kelolaBarang/tambah' element={<TambahBarang/>}/>
+        <Route path='/admin/kelolaBarang/edit' element={<EditBarang/>}/>
+        <Route path='/admin/kelolaBarang/detail' element={<DetailBarang/>}/>
+        <Route path='/admin/profile' element={<Profile/>}/>
 
         <Route path='/test' element={<TestComponenet/>}/>
       </Routes>

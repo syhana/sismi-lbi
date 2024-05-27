@@ -1,11 +1,11 @@
 import Sidebar from '../../../components/sidebar/Sidebar'
-import AkunContent from './akunContent'
+import ProfileContent from './ProfileContent'
 
-export default function AkunPengguna (){
+export default function Profile (){
     return (
         <>
         <Sidebar profile={'/admin/profile'}>
-            <AkunContent/>
+            <ProfileContent/>
         </Sidebar>
         </>
     )

@@ -56,7 +56,7 @@ const ListContainer = styled(List)({
     color: 'white',
   },
   '& .MuiListItemButton-root:hover .MuiListItemIcon-root, & .MuiListItemButton-root:hover .MuiTypography-root': {
-    fontWeight: 'bold', // Membuat teks menjadi tebal saat di-hover
+    fontWeight: 'bold', 
   },
 });
 
@@ -97,7 +97,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 // eslint-disable-next-line react/prop-types
-export default function MiniDrawer({children}) {
+export default function MiniDrawer({children, profile}) {
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -177,7 +177,7 @@ export default function MiniDrawer({children}) {
         className='pt-20 pe-5'
       >
         <div className="akun flex justify-end mr-10" style={{ display: 'flex', alignItems: 'center' }}>
-          <p className="text-black font-bold text-2xl me-5 ">Admin</p>
+          <a href={profile}><p className="text-black font-bold text-2xl me-5 ">Admin</p></a>
           <img src="/public/profile.svg" alt=""/>
         </div>
         {children}

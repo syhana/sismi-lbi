@@ -11,6 +11,8 @@ export default {
         secondary: '#435DC7',
         complementary: '#B7B7B7',
         biruComplement: '#C6DBF4',
+        tersedia: '#0FA958',
+        tidakTersedia: '##ADA694',
         linearBlue: {
           start: '#435DC7', // Warna awal
           end: '#E8ECFD', // Warna akhir

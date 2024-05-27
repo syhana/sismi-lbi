@@ -2,6 +2,7 @@ import ButtonIcon from "./components/button/buttonIcon"
 import Tabel from "./components/table/Tabel"
 import InputSelect from './components/input/inputSelect'
 import InputFile from "./components/input/inputFile";
+import Badges from "./components/badges/badges";
 
 export default function TestComponenet (){
 
@@ -40,6 +41,7 @@ export default function TestComponenet (){
         />
         <InputSelect data={people} defaultValue={people[0]} label={'pilih'}/>
         <InputFile label={'Tanda Tangan'}/>
+        <Badges label={'Tersedia'} className={'bg-tersedia text-white px-6 py-2'}/>
         </>
     )
 }

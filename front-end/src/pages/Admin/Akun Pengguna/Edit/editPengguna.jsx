@@ -4,7 +4,7 @@ import AkunEditContent from './akunEditContent'
 export default function EditPengguna (){
     return (
         <>
-            <Sidebar>
+            <Sidebar profile={'/admin/profile'}>
                 <AkunEditContent/>
             </Sidebar> 
         </>
