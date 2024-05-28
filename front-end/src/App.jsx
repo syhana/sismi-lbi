@@ -12,6 +12,13 @@ import TambahBarang from './pages/Admin/Mengelola Barang/Tambah/TambahBarang';
 import EditBarang from './pages/Admin/Mengelola Barang/Edit/EditBarang';
 import DetailBarang from './pages/Admin/Mengelola Barang/Detail/DetailBarang';
 import Profile from './pages/Admin/Profile/Profile';
+import RegisMahasiswa from './pages/Mahasiswa/RegisMahasiswa';
+import LoginMahasiswa from './pages/Mahasiswa/LoginMahasiswa';
+import GenerateSurat from './pages/Mahasiswa/Generate Surat/GenerateSurat';
+import PeminjamanBarang from './pages/Mahasiswa/Generate Surat/PeminjamanBarang';
+import PeminjamanRuangan from './pages/Mahasiswa/Generate Surat/PeminjamanRuangan';
+import PermohonanTA from './pages/Mahasiswa/Generate Surat/PermohonanTA';
+
 
 function App() {
 
@@ -31,6 +38,15 @@ function App() {
         <Route path='/admin/kelolaBarang/edit' element={<EditBarang/>}/>
         <Route path='/admin/kelolaBarang/detail' element={<DetailBarang/>}/>
         <Route path='/admin/profile' element={<Profile/>}/>
+
+        <Route path='/regisMahasiswa' element={<RegisMahasiswa/>}/>
+        <Route path='/loginMahasiswa' element={<LoginMahasiswa/>}/>
+        
+        <Route path='/mahasiswa/generateSurat' element={<GenerateSurat/>}/>
+        <Route path='/mahasiswa/generateSurat/pinjamBarang' element={<PeminjamanBarang/>}/>
+        <Route path='/mahasiswa/generateSurat/pinjamRuang' element={<PeminjamanRuangan/>}/>
+        <Route path='/mahasiswa/generateSurat/permohonanTA' element={<PermohonanTA/>}/>
+
 
         <Route path='/test' element={<TestComponenet/>}/>
       </Routes>

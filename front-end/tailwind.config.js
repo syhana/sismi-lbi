@@ -17,12 +17,31 @@ export default {
           start: '#435DC7', // Warna awal
           end: '#E8ECFD', // Warna akhir
         },
+        linearBlue2: {
+          start: '#8AA0E5', // Warna awal
+          end: '#435DC7', // Warna akhir
+        },
       },
       // Atur background gradient menggunakan warna linear baru
       backgroundImage: theme => ({
         'blue-gradient': `linear-gradient(to bottom, ${theme('colors.linearBlue.start')}, ${theme('colors.linearBlue.end')})`,
+        'blue-gradient2': `linear-gradient(to bottom, ${theme('colors.linearBlue2.start')}, ${theme('colors.linearBlue2.end')})`,
       }),
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      addUtilities({
+        '.hide-scrollbar': {
+          /* Hide scrollbar for Chrome, Safari and Opera */
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+          /* Hide scrollbar for IE, Edge and Firefox */
+          '-ms-overflow-style': 'none',  /* IE and Edge */
+          'scrollbar-width': 'none',  /* Firefox */
+        },
+      }, ['responsive'])
+    },
+  ],
 }

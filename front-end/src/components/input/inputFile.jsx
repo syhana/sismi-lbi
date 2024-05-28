@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-const InputFile = ({ label, onChange, placeholder }) => {
+const InputFile = ({ label, onChange, placeholder, className}) => {
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("");
 
@@ -19,7 +19,7 @@ const InputFile = ({ label, onChange, placeholder }) => {
 
   return (
     <div className="mb-4">
-      <label htmlFor="file" className="block mt-5 text-base font-medium text-primary pb-3">{label}</label>
+      <label htmlFor="file" className={`block mt-5 text-base font-medium text-primary pb-3 ${className}`}>{label}</label>
       <div className="relative mt-1 flex">
         <button
           type="button"
