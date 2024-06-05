@@ -1,9 +1,12 @@
 import ButtonIcon from "./components/button/buttonIcon"
-import Tabel from "./components/table/Tabel"
+import Tabel from "./components/table/TabelAkunAdmin"
 import InputSelect from './components/input/inputSelect'
 import InputFile from "./components/input/inputFile";
 import Badges from "./components/badges/badges";
 import JenisSurat from "./components/button/JenisSurat";
+import AlertSuccess from "./components/alert/AlertSuccess";
+import UploadFile from "./components/input/uploadFile";
+import FormTambahDisposisiMhs from "./components/form/Mahasiswa/Disposisi/FormTambahDisposisiMhs";
 
 export default function TestComponenet (){
 
@@ -44,6 +47,9 @@ export default function TestComponenet (){
         <InputFile label={'Tanda Tangan'}/>
         <Badges label={'Tersedia'} className={'bg-tersedia text-white px-6 py-2'}/>
         <JenisSurat/>
+        <AlertSuccess label={'Selamat'}/>
+        <UploadFile label={'Bukti Pembayaran'} icon={'/public/add file.svg'}/>
+        <FormTambahDisposisiMhs/>
         </>
     )
 }

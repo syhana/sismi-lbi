@@ -20,7 +20,7 @@ export default function Tabel({ className, data, columns, bg_head, onView, onEdi
 
     const handleCancelDelete = () => {
         setIsModalOpen(false);
-    };
+    }; 
 
     return (
         <div>
@@ -38,8 +38,8 @@ export default function Tabel({ className, data, columns, bg_head, onView, onEdi
                     {data.map((row, index) => (
                         <tr key={index} className="border-b border-gray-300">
                             <td className="p-5">{index + 1}</td>
-                            <td className="p-2">{row.name}</td>
-                            <td className="p-2">{row.role}</td>
+                            <td className="p-2">{row.nama_barang}</td>
+                            <td className="p-2">{row.status_barang}</td>
                             <td className="p-2">
                                 <TabelAction
                                     onView={() => navigate(`${onView}`)}

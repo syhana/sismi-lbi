@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const InputPass = ({name, label, placeholder, value, onChange, className, disabled}) => {
+const InputPass = ({ name, label, placeholder, value, onChange, className, disabled, classDiv}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -8,11 +8,11 @@ const InputPass = ({name, label, placeholder, value, onChange, className, disabl
   };
 
   return (
-    <div className="mb-4">
+    <div className={`mb-4 w-full ${classDiv}`}>
       <label htmlFor="input" className={`block mt-5 text-base ${className}`}>
         {label}
       </label>
-      <div className="relative mt-2 rounded-md shadow-sm">
+      <div className="relative mt-2 rounded-md shadow-sm w-full">
         <input
           type={showPassword ? "text" : "password"}
           name={name}

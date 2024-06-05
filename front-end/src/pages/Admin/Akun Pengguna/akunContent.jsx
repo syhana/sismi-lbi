@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ButtonIcon from '../../../components/button/buttonIcon'
-import Tabel from '../../../components/table/Tabel'
+import Tabel from '../../../components/table/TabelAkunAdmin'
 
 const data = [
     { id: 1, name: "Arif Wahyudi", role: "Asisten" },

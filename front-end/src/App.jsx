@@ -18,7 +18,14 @@ import GenerateSurat from './pages/Mahasiswa/Generate Surat/GenerateSurat';
 import PeminjamanBarang from './pages/Mahasiswa/Generate Surat/PeminjamanBarang';
 import PeminjamanRuangan from './pages/Mahasiswa/Generate Surat/PeminjamanRuangan';
 import PermohonanTA from './pages/Mahasiswa/Generate Surat/PermohonanTA';
-
+import KelolaSurat from './pages/Mahasiswa/Kelola Surat/KelolaSurat';
+import TambahSurat from './pages/Mahasiswa/Kelola Surat/Tambah/TambahSurat';
+import EditSurat from './pages/Mahasiswa/Kelola Surat/Edit/EditSurat';
+import DetailSurat from './pages/Mahasiswa/Kelola Surat/Detail/DetailSurat';
+import DisposisiSurat from './pages/Mahasiswa/Disposisi Surat/DisposisiSurat';
+import TambahDisposisi from './pages/Mahasiswa/Disposisi Surat/Tambah/TambahDiposisi';
+import EditDisposisi from './pages/Mahasiswa/Disposisi Surat/Edit/EditDisposisi';
+import ProfileMhs from './pages/Mahasiswa/Profile/Profile';
 
 function App() {
 
@@ -46,6 +53,16 @@ function App() {
         <Route path='/mahasiswa/generateSurat/pinjamBarang' element={<PeminjamanBarang/>}/>
         <Route path='/mahasiswa/generateSurat/pinjamRuang' element={<PeminjamanRuangan/>}/>
         <Route path='/mahasiswa/generateSurat/permohonanTA' element={<PermohonanTA/>}/>
+
+        <Route path='/mahasiswa/kelolaSurat' element={<KelolaSurat/>}/>
+        <Route path='/mahasiswa/kelolaSurat/tambah' element={<TambahSurat/>}/>
+        <Route path='/mahasiswa/kelolaSurat/edit' element={<EditSurat/>}/>
+        <Route path='/mahasiswa/kelolaSurat/detail' element={<DetailSurat/>}/>
+
+        <Route path='/mahasiswa/disposisiSurat' element={<DisposisiSurat/>}/>
+        <Route path='/mahasiswa/disposisiSurat/tambah' element={<TambahDisposisi/>}/>
+        <Route path='/mahasiswa/disposisiSurat/Edit' element={<EditDisposisi/>}/>
+        <Route path='/mahasiswa/profile' element={<ProfileMhs/>}/>
 
 
         <Route path='/test' element={<TestComponenet/>}/>
