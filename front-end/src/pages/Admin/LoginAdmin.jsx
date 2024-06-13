@@ -6,4 +6,4 @@ export default function LoginAdmin (){
         <FormLogin label1={'username'} label2={'password'} gambar={'loginAdmin.svg'}/>
         </>
     )
-}
+} 

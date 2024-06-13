@@ -26,6 +26,21 @@ import DisposisiSurat from './pages/Mahasiswa/Disposisi Surat/DisposisiSurat';
 import TambahDisposisi from './pages/Mahasiswa/Disposisi Surat/Tambah/TambahDiposisi';
 import EditDisposisi from './pages/Mahasiswa/Disposisi Surat/Edit/EditDisposisi';
 import ProfileMhs from './pages/Mahasiswa/Profile/Profile';
+import LoginAsisten from './pages/Asisten/LoginAsisten';
+import SuratMasuk from './pages/Asisten/Surat Masuk/SuratMasuk';
+import TambahSuratMasuk from './pages/Asisten/Surat Masuk/TambahSuratMasuk';
+import DetailSuratMasuk from './pages/Asisten/Surat Masuk/DetailSuratMasuk';
+import EditSuratMasuk from './pages/Asisten/Surat Masuk/EditSuratMasuk';
+import SuratKeluar from './pages/Asisten/Surat Keluar/SuratKeluar';
+import TambahSuratKeluar from './pages/Asisten/Surat Keluar/TambahSuratKeluar';
+import EditSuratKeluar from './pages/Asisten/Surat Keluar/EditSuratKeluar';
+import DetailSuratKeluar from './pages/Asisten/Surat Keluar/DetailSuratKeluar';
+import DisposisiSuratAsisten from './pages/Asisten/Disposisi/DisposisiSurat';
+import DetailDisposisiAsiten from './pages/Asisten/Disposisi/DetailDisposisi';
+import MyDisposisi from './pages/Asisten/Disposisi/MyDisposisi/MyDisposisi';
+import TambahMyDisposisi from './pages/Asisten/Disposisi/MyDisposisi/TambahMyDisposisi';
+import EditMyDisposisi from './pages/Asisten/Disposisi/MyDisposisi/EditMyDisposisi';
+import ProfileAsisten from './pages/Asisten/ProfileAsisten';
 
 function App() {
 
@@ -64,6 +79,25 @@ function App() {
         <Route path='/mahasiswa/disposisiSurat/Edit' element={<EditDisposisi/>}/>
         <Route path='/mahasiswa/profile' element={<ProfileMhs/>}/>
 
+        <Route path='/loginAsisten' element={<LoginAsisten/>}/>
+        <Route path='/asisten/suratMasuk' element={<SuratMasuk/>}/>
+        <Route path='/asisten/suratMasuk/tambah' element={<TambahSuratMasuk/>}/>
+        <Route path='/asisten/suratMasuk/detail' element={<DetailSuratMasuk/>}/>
+        <Route path='/asisten/suratMasuk/edit' element={<EditSuratMasuk/>}/>
+
+        <Route path='/asisten/suratKeluar' element={<SuratKeluar/>}/>
+        <Route path='/asisten/suratKeluar/tambah' element={<TambahSuratKeluar/>}/>
+        <Route path='/asisten/suratKeluar/Edit' element={<EditSuratKeluar/>}/>
+        <Route path='/asisten/suratKeluar/detail' element={<DetailSuratKeluar/>}/>
+
+        <Route path='/asisten/disposisiSurat' element={<DisposisiSuratAsisten/>}/>
+        <Route path='/asisten/disposisiSurat/detail' element={<DetailDisposisiAsiten/>}/>
+
+        <Route path='/asisten/disposisiSurat/myDisposisi' element={<MyDisposisi/>}/>
+        <Route path='/asisten/disposisiSurat/myDisposisi/tambah' element={<TambahMyDisposisi/>}/>
+        <Route path='/asisten/disposisiSurat/myDisposisi/edit' element={<EditMyDisposisi/>}/>
+
+        <Route path='/asisten/profile' element={<ProfileAsisten/>}/>
 
         <Route path='/test' element={<TestComponenet/>}/>
       </Routes>
