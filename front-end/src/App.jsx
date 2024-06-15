@@ -41,6 +41,17 @@ import MyDisposisi from './pages/Asisten/Disposisi/MyDisposisi/MyDisposisi';
 import TambahMyDisposisi from './pages/Asisten/Disposisi/MyDisposisi/TambahMyDisposisi';
 import EditMyDisposisi from './pages/Asisten/Disposisi/MyDisposisi/EditMyDisposisi';
 import ProfileAsisten from './pages/Asisten/ProfileAsisten';
+import LoginKalab from './pages/Kepala Laboratorium/LoginKalab';
+import DisposisiSuratKalab from './pages/Kepala Laboratorium/Disposisi Surat/DisposisiSurat';
+import DetailDisposisiKalab from './pages/Kepala Laboratorium/Disposisi Surat/Detail/DetailDisposisiKalab';
+import TandaTanganKalab from './pages/Kepala Laboratorium/Disposisi Surat/TTD/TandaTanganKalab';
+import LaporanSuratMasuk from './pages/Kepala Laboratorium/Laporan Surat Masuk/LaporanSuratMasuk';
+import LaporanSuratKeluar from './pages/Kepala Laboratorium/Laporan Surat Keluar/LaporanSuratKeluar';
+import ProfileKalab from './pages/Kepala Laboratorium/ProfileKalab';
+import DisposisiSuratKoor from './pages/Koordinator Asisten/Disposisi Surat/DisposisiSurat';
+import DetailDisposisiKoor from './pages/Koordinator Asisten/Detail/DetailDisposisiKoor';
+import TandaTanganKoor from './pages/Koordinator Asisten/TTD/TandaTanganKoor';
+import ProfileKoor from './pages/Koordinator Asisten/ProfileKoor';
 
 function App() {
 
@@ -98,6 +109,21 @@ function App() {
         <Route path='/asisten/disposisiSurat/myDisposisi/edit' element={<EditMyDisposisi/>}/>
 
         <Route path='/asisten/profile' element={<ProfileAsisten/>}/>
+
+        <Route path='/loginKalab' element={<LoginKalab/>}/>
+        <Route path='/kalab/disposisiSurat' element={<DisposisiSuratKalab/>}/>
+        <Route path='/kalab/disposisiSurat/detail' element={<DetailDisposisiKalab/>}/>
+        <Route path='/kalab/disposisiSurat/ttd' element={<TandaTanganKalab/>}/>
+        <Route path='/kalab/laporanSuratMasuk' element={<LaporanSuratMasuk/>}/>
+        <Route path='/kalab/laporanSuratKeluar' element={<LaporanSuratKeluar/>}/>
+        <Route path='/kalab/profile' element={<ProfileKalab/>}/>
+
+        <Route path='/koor/disposisiSurat' element={<DisposisiSuratKoor/>}/>
+        <Route path='/koor/disposisiSurat/detail' element={<DetailDisposisiKoor/>}/>
+        <Route path='/koor/disposisiSurat/ttd' element={<TandaTanganKoor/>}/>
+        <Route path='/koor/profile' element={<ProfileKoor/>}/>
+
+
 
         <Route path='/test' element={<TestComponenet/>}/>
       </Routes>
