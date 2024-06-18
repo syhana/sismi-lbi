@@ -22,16 +22,7 @@ app.use(cors({
   origin: 'http://localhost:5137'
 })) 
 
-app.use((err, req, res, next) => {
-  if (err instanceof multer.MulterError) {
-    res.status(400).json({
-      success: false,
-      message: err.message
-    });
-  } else {
-    next(err);
-  }
-});
+
 
 app.use('/', server.admin)
 app.use('/', server.akunPengguna)
@@ -54,6 +45,17 @@ app.use('/', server.disposisiKalab)
 app.use('/', server.laporanSuratMasuk)
 app.use('/', server.laporanSuratKeluar)
 app.use('/', server.profileKalab)
+
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    res.status(400).json({
+      success: false,
+      message: err.message
+    });
+  } else {
+    next(err);
+  }
+});
 
 
 

@@ -1,6 +1,7 @@
 const modelSuratKeluar = require('../../models/surat_keluar')
 const multer = require('multer')
 const path = require('path')
+const { exec } = require('child_process');
 
 const storage = multer.diskStorage({
     destination: function(req,file, cb){
@@ -49,7 +50,17 @@ const tambahSurat = async (req,res) => {
             nama_surat_keluar: nama_surat_keluar,
             file_surat_keluar: file_surat_keluar.originalname
         })
-        return res.status(200).json({success: true, message: 'Data surat keluar berhasil ditambahkan'})
+        const repoPath = path.join(__dirname, '../', '../'); // Sesuaikan path ini
+        const filePath = path.join(repoPath, 'public', 'doc', 'Asisten', 'suratKeluar', file_surat_keluar.originalname);
+        exec(`cd ${repoPath} && git add ${filePath} && git commit -m "Add new surat: ${file_surat_keluar.originalname}" && git push`, (err, stdout, stderr) => {
+            if (err) {
+                console.error(`Error executing git commands: ${err}`);
+                return res.status(500).json({ success: false, message: 'Kesalahan Server saat menyimpan ke GitHub' });
+            }
+            console.log(`stdout: ${stdout}`);
+            console.error(`stderr: ${stderr}`);
+            return res.status(200).json({ success: true, message: 'Data surat keluar berhasil ditambahkan dan disimpan ke GitHub' });
+        });
     } catch (error) {
         console.log(error)
         return res.status(500).json({success: false, message: 'Kesalahan Server'})

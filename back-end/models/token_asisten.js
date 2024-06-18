@@ -23,6 +23,10 @@ const token_asisten = sequelize.define('token_asisten', {
     updated_at:{
         type: DataTypes.DATE,
         allowNull: false
+    },
+    expires_at:{
+        type: DataTypes.DATE,
+        defaultValue: () => new Date(new Date().getTime() + (7 * 24 * 60 * 60 * 1000))
     }
 }, {
     tableName: 'token_asisten',

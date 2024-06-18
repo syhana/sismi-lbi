@@ -69,6 +69,7 @@ const generateSurat = async (req,res) => {
         const {id_jenis} = req.params
         let i = 1;
         const nim_mahasiswa = req.mahasiswa.nim_mahasiswa
+        console.log(nim_mahasiswa)
         const findMhs = await modelMahasiswa.findByPk(nim_mahasiswa)
         if (!findMhs) {
             return res.status(400).json({success: false, message: 'Data mahasiswa tidak ditemukan'})

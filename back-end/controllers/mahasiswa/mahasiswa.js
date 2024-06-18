@@ -82,6 +82,7 @@ const loginMahasiswa = async (req,res) => {
                 return res.status(400).json({success: false, message: 'Password akun anda salah'})            
             }
             const nim_mahasiswa = findMhs.nim_mahasiswa
+            console.log(nim_mahasiswa);
             const token = jwt.sign(
                 {
                     nim_mahasiswa

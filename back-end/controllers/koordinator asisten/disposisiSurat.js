@@ -107,11 +107,13 @@ const tandaTangan = async (req,res) => {
         const ttdBytes = fs.readFileSync(ttdPath)
 
         let pdfPath
+        console.log()
+    
 
         if (findDisposisi.id_surat_mahasiswa != null) {
-            pdfPath = path.join(__dirname, '../', '../', 'public', 'doc', 'suratMahasiswa', findDisposisi.dataSuratMhs.dataValues.file_surat_mahasiswa)
+            pdfPath = path.join(__dirname, '../', '../', 'public', 'doc', 'suratMahasiswa', findDisposisi.dataValues.dataSuratKeluar.file_surat_mahasiswa)
         }
-        pdfPath = path.join(__dirname, '../', '../', 'public', 'doc', 'Asisten', 'suratKeluar', findDisposisi.dataSuratKeluar.dataValues.file_surat_keluar)
+        pdfPath = path.join(__dirname, '../', '../', 'public', 'doc', 'Asisten', 'suratKeluar', findDisposisi.dataValues.dataSuratKeluar.file_surat_keluar)
 
         const pdfbytes = fs.readFileSync(pdfPath)
 

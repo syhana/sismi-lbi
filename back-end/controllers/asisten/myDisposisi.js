@@ -27,6 +27,10 @@ const tambahDisposisi = async (req,res) => {
         if (!no_surat_keluar || !tujuan_disposisi) {
             return res.status(400).json({success: false, message: 'Silahkan lengkapi data disposisi yang akan ditambahkan'})
         }
+        const findNoSuratKeluar = await modelSuratKeluar.findByPk(no_surat_keluar)
+        if (!findNoSuratKeluar) {
+            return res.status(400).json({success: false, message: 'Surat Keluar tidak ditemukan'})
+        }
         const findDisposisi = await modelDisposisiSurat.findOne({
             where:{
                 no_surat_keluar: no_surat_keluar,
