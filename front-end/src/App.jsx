@@ -52,6 +52,7 @@ import DisposisiSuratKoor from './pages/Koordinator Asisten/Disposisi Surat/Disp
 import DetailDisposisiKoor from './pages/Koordinator Asisten/Detail/DetailDisposisiKoor';
 import TandaTanganKoor from './pages/Koordinator Asisten/TTD/TandaTanganKoor';
 import ProfileKoor from './pages/Koordinator Asisten/ProfileKoor';
+import TokenNotFound from './TokenNotFound';
 
 function App() {
 
@@ -63,13 +64,13 @@ function App() {
         <Route path='/loginAdmin' element={<LoginAdmin/>}/>
         <Route path='/admin/akunPengguna' element={<AkunPengguna/>}/>
         <Route path='/admin/akunPengguna/tambah' element={<TambahPengguna/>}/>
-        <Route path='/admin/akunPengguna/edit' element={<EditPengguna/>}/>
-        <Route path='/admin/akunPengguna/detail' element={<DetailPengguna/>}/>
+        <Route path='/admin/akunPengguna/edit/:nama' element={<EditPengguna/>}/>
+        <Route path='/admin/akunPengguna/detail/:nama' element={<DetailPengguna/>}/>
 
         <Route path='/admin/kelolaBarang' element={<KelolaBarang/>}/>
         <Route path='/admin/kelolaBarang/tambah' element={<TambahBarang/>}/>
-        <Route path='/admin/kelolaBarang/edit' element={<EditBarang/>}/>
-        <Route path='/admin/kelolaBarang/detail' element={<DetailBarang/>}/>
+        <Route path='/admin/kelolaBarang/edit/:id_barang' element={<EditBarang/>}/>
+        <Route path='/admin/kelolaBarang/detail/:id_barang' element={<DetailBarang/>}/>
         <Route path='/admin/profile' element={<Profile/>}/>
 
         <Route path='/regisMahasiswa' element={<RegisMahasiswa/>}/>
@@ -122,6 +123,9 @@ function App() {
         <Route path='/koor/disposisiSurat/detail' element={<DetailDisposisiKoor/>}/>
         <Route path='/koor/disposisiSurat/ttd' element={<TandaTanganKoor/>}/>
         <Route path='/koor/profile' element={<ProfileKoor/>}/>
+
+        <Route path='/notAllowed' element={<TokenNotFound/>}/>
+
 
 
 

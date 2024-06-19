@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TabelAction from "./tableAction";
 import AlertNotif from "../alert/AlertNotif";
+import Badges from "../badges/badges";
 
 export default function Tabel({ className, data, columns, bg_head, onView, onEdit}) {
     const navigate = useNavigate();
@@ -39,12 +40,17 @@ export default function Tabel({ className, data, columns, bg_head, onView, onEdi
                         <tr key={index} className="border-b border-gray-300">
                             <td className="p-5">{index + 1}</td>
                             <td className="p-2">{row.nama_barang}</td>
-                            <td className="p-2">{row.status_barang}</td>
+                            <td className="p-2">
+                                <Badges
+                                    label={row.status_barang === "Tersedia" ? 'Tersedia' : 'Tidak Tersedia'}
+                                    className={row.status_barang === "Tersedia" ? 'bg-tersedia text-white px-6 py-2' : 'bg-tidakTersedia text-white px-6 py-2'}
+                                />
+                            </td>
                             <td className="p-2">
                                 <TabelAction
-                                    onView={() => navigate(`${onView}`)}
-                                    onEdit={() => navigate(`${onEdit}`)}
-                                    onDelete={() => showDeleteConfirmation(row.id)}
+                                    onView={() => navigate(`${onView}/${row.id_barang}`)}
+                                    onEdit={() => navigate(`${onEdit}/${row.id_barang}`)}
+                                    onDelete={() => showDeleteConfirmation(row.id_barang)}
                                 />
                             </td>
                         </tr>
