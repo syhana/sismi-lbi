@@ -1,7 +1,4 @@
-// TabelDisposisiMhs.js
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AlertNotif from "../alert/AlertNotif";
 import Badges from "../badges/badges"; 
 import TabelActionKalab from "./tableActionKalab";
 
@@ -47,9 +44,9 @@ export default function TabelDisposisiKoor({ className, data, columns, bg_head, 
               </td>
               <td className="p-2">
                 <TabelActionKalab 
-                onView={() => navigate(`${onView}`)}
-                onTTD={() => navigate(`${onTTD}`)}
-                showButtons={{ttd:true, view:true}}
+                  onView={() => navigate(`${onView}/${row.nama_surat}`)}
+                  onTTD={() => navigate(`${onTTD}`)}
+                  showButtons={{ttd:true, view:true}}
                 />
               </td>
             </tr>

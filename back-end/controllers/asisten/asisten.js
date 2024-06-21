@@ -33,7 +33,7 @@ const loginAsiten = async (req,res) => {
                 id_asisten: id_asisten,
                 token: token
             })
-            return res.status(200).json({success: true, message: 'Login Berhasil', token: token})
+            return res.status(200).json({success: true, message: 'Login Berhasil', token: token, idRole: id_role})
         })
     } catch (error) {
         console.log(error)

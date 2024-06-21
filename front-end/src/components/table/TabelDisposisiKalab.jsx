@@ -1,7 +1,4 @@
-// TabelDisposisiMhs.js
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AlertNotif from "../alert/AlertNotif";
 import Badges from "../badges/badges"; 
 import TabelActionKalab from "./tableActionKalab";
 
@@ -42,13 +39,12 @@ export default function TabelDisposisiKalab({ className, data, columns, bg_head,
             <tr key={index} className="border-b border-gray-300">
               <td className="p-5">{index + 1}</td>
               <td className="p-2">{row.nama_surat}</td>
-              <td className="p-2">{row.pengirim}</td>
               <td className="p-2">
                 <Badges label={row.status_disposisi} className={getStatusColor(row.status_disposisi)} />
               </td>
               <td className="p-2">
                 <TabelActionKalab 
-                onView={() => navigate(`${onView}`)}
+                onView={() => navigate(`${onView}/${row.nama_surat}`)}
                 onTTD={() => navigate(`${onTTD}`)}
                 showButtons={{ttd:true, view:true}}
                 />

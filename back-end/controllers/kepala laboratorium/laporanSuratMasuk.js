@@ -11,9 +11,10 @@ const path = require("path");
 
 
 //generate laporan surat masuk
-const generateLaporanMasuk = async (req,res) =>{
+const generateLaporanMasuk = async (req, res) => {
     try {
-        const {tanggal_awal, tanggal_akhir} = req.body
+        const { tanggal_awal, tanggal_akhir } = req.body;
+
         const findSuratMasuk = await modelSuratMasuk.findAll({
             where: {
                 created_at: {
@@ -49,23 +50,20 @@ const generateLaporanMasuk = async (req,res) =>{
                     ]
                 }
             ]
-        });        
+        });
+
         if (findSuratMasuk.length === 0) {
-            return res.status(400).json({success: false, message: 'Data surat masuk belum tersedia'})
+            return res.status(400).json({ success: false, message: 'Data surat masuk belum tersedia' });
         }
-        const content = fs.readFileSync(
-            path.resolve(__dirname, __dirname, '../', '../', 'public', 'doc', 'template', 'Laporan_Surat Masuk.docx'),
-          "binary"
-        )
-        const zip = new PizZip(content)
+
+        const content = fs.readFileSync(path.resolve(__dirname, '../', '../', 'public', 'doc', 'template', 'Laporan_Surat Masuk.docx'), "binary");
+        const zip = new PizZip(content);
         const doc = new Docxtemplater(zip, {
-            paragraphLoop: true, 
+            paragraphLoop: true,
             linebreaks: true
-        })
+        });
 
-        // console.log(findSuratMasuk)
-
-        let dataSurat = []
+        let dataSurat = [];
         for (let index = 0; index < findSuratMasuk.length; index++) {
             const dataAsisten = findSuratMasuk[index].dataAsisten;
             const dataSuratMasukMhs = findSuratMasuk[index].dataSuratMasukMhs;
@@ -77,34 +75,36 @@ const generateLaporanMasuk = async (req,res) =>{
                 "perihal_surat": findSuratMasuk[index].nama_surat_masuk,
                 "dari": dataAsisten ? dataAsisten.nama_asisten : dataSuratMasukMhs.dataMahasiswa.nama_mahasiswa,
                 "keterangan": '-'
-            }
+            };
 
-            dataSurat.push(data)
+            dataSurat.push(data);
         }
 
-        doc.render({
+        doc.setData({
             "surat": dataSurat
-        })
+        });
+
+        doc.render();
 
         const buf = doc.getZip().generate({
             type: "nodebuffer",
             compression: "DEFLATE",
         });
-        
+
         const timestamp = new Date().toISOString().replace(/[-T:.Z]/g, '').slice(0, 14);
         const fileName = `Laporan_Surat_Masuk_${tanggal_awal}_${tanggal_akhir}_${timestamp}.docx`;
-  
-        fs.writeFileSync(path.resolve(__dirname, '../', '../', 'public', 'doc', 'laporanSuratMasuk', fileName), buf); 
-        res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
-        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-   
-        res.send(buf);
 
-        // return res.status(200).json({success: true, message: 'Laporan berhasil digenerate'})
+        const outputPath = path.resolve(__dirname, '../', '../', 'public', 'doc', 'laporanSuratMasuk', fileName);
+        fs.writeFileSync(outputPath, buf);
+
+        // Kirim respons dengan nama file untuk digunakan di frontend
+        res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+        res.download(outputPath, fileName);
+
     } catch (error) {
-        console.log(error)
-        return res.status(500).json({success: false, message: 'Kesalahan Server'})
+        console.log(error);
+        return res.status(500).json({ success: false, message: 'Kesalahan Server' });
     }
-}
+};
 
 module.exports = {generateLaporanMasuk}

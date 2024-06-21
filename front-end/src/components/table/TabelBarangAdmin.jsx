@@ -3,20 +3,27 @@ import { useNavigate } from "react-router-dom";
 import TabelAction from "./tableAction";
 import AlertNotif from "../alert/AlertNotif";
 import Badges from "../badges/badges";
+import HapusBarang from "../../api/admin/Barang/HapusBarang";
 
 export default function Tabel({ className, data, columns, bg_head, onView, onEdit}) {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false); 
     const [posisToDelete, setPosisToDelete] = useState(null); 
 
-    const showDeleteConfirmation = (id) => {
-        setPosisToDelete(id); 
+    const showDeleteConfirmation = (id_barang) => {
+        setPosisToDelete(id_barang); 
         setIsModalOpen(true); 
     };
 
-    const handleDeleteConfirmation = () => {
-        console.log("Menghapus data dengan id:", posisToDelete);
+    const handleDeleteConfirmation = async () => {
         setIsModalOpen(false);
+        try {
+            await HapusBarang(posisToDelete);
+            window.location.reload()
+        } catch (error) {
+            console.error("Error deleting akun:", error);
+
+        }
     };
 
     const handleCancelDelete = () => {

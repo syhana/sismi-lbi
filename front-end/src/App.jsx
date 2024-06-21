@@ -113,14 +113,14 @@ function App() {
 
         <Route path='/loginKalab' element={<LoginKalab/>}/>
         <Route path='/kalab/disposisiSurat' element={<DisposisiSuratKalab/>}/>
-        <Route path='/kalab/disposisiSurat/detail' element={<DetailDisposisiKalab/>}/>
+        <Route path='/kalab/disposisiSurat/detail/:file_surat' element={<DetailDisposisiKalab/>}/>
         <Route path='/kalab/disposisiSurat/ttd' element={<TandaTanganKalab/>}/>
         <Route path='/kalab/laporanSuratMasuk' element={<LaporanSuratMasuk/>}/>
         <Route path='/kalab/laporanSuratKeluar' element={<LaporanSuratKeluar/>}/>
-        <Route path='/kalab/profile' element={<ProfileKalab/>}/>
+        <Route path='/profile/kalab' element={<ProfileKalab/>}/>
 
         <Route path='/koor/disposisiSurat' element={<DisposisiSuratKoor/>}/>
-        <Route path='/koor/disposisiSurat/detail' element={<DetailDisposisiKoor/>}/>
+        <Route path='/koor/disposisiSurat/detail/:nama_surat' element={<DetailDisposisiKoor/>}/>
         <Route path='/koor/disposisiSurat/ttd' element={<TandaTanganKoor/>}/>
         <Route path='/koor/profile' element={<ProfileKoor/>}/>
 
