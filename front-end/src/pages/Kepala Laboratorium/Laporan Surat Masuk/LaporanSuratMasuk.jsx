@@ -38,7 +38,7 @@ const LaporanSuratMasuk = () => {
     };
 
     return (
-        <SidebarKalab profile={'/profile/kalab'} nama_kalab={'Nadini Annisa Byant'}>
+        <SidebarKalab profile={'/profile/kalab'} nama_kalab={'Kepala Laboratorium'}>
             <div className="p-10 ps-12">
                 <p className="text-primary font-bold text-3xl">Laporan Surat Masuk</p>
                 <div className="pt-10">

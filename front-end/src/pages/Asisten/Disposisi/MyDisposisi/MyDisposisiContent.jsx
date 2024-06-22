@@ -1,6 +1,9 @@
 import ButtonIcon from "../../../../components/button/buttonIcon";
 import TabelMyDisposisi from "../../../../components/table/TabelMyDisposisi";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import ListMyDisposisi from "../../../../api/Asisten/My Disposisi/ListMyDisposisi";
+import Swal from "sweetalert2";
 
 export default function MyDisposisiContent (){
     const navigate = useNavigate();
@@ -8,14 +11,7 @@ export default function MyDisposisiContent (){
     const handleTambahDataClick = () => {
         navigate("/asisten/disposisiSurat/myDisposisi/tambah");
     };
-    
-    const data = [
-        { id: 1, nama_surat: "Surat Peminjaman Ruangan", tujuan_disposisi: 'Surat_peminjaman_nadini.pdf', status_disposisi:'menunggu'},
-        { id: 1, nama_surat: "Surat Peminjaman Ruangan", tujuan_disposisi: 'Surat_peminjaman_nadini.pdf', status_disposisi:'Selesai'},
-        { id: 1, nama_surat: "Surat Peminjaman Ruangan", tujuan_disposisi: 'Surat_peminjaman_nadini.pdf', status_disposisi:'menunggu'},
-        { id: 1, nama_surat: "Surat Peminjaman Ruangan", tujuan_disposisi: 'Surat_peminjaman_nadini.pdf', status_disposisi:'Selesai'},
-    ];
-    
+
     const columns = [
         { key: "no", label: "No" },
         { key: "nama_surat", label: "Nama Surat" },
@@ -23,6 +19,35 @@ export default function MyDisposisiContent (){
         { key: "status_disposisi", label: "Status Disposisi" },
         { key: "action", label: "Aksi" },
     ];
+
+    const [data,setData] = useState([])
+
+    useEffect(() => async () => {
+        const fetchData = async () => {
+            try {
+                const response = await ListMyDisposisi()
+                if (response.success) {
+                    const formattedData = response.data.map((item, index) => ({
+                        no: index + 1,
+                        nama_surat: item.dataSuratKeluar.nama_surat_keluar,
+                        tujuan_disposisi: item.tujuan_disposisi,
+                        status_disposisi: item.status_disposisi,
+                        id: item.id_disposisi
+                    }))
+                    setData(formattedData)
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: response.message,
+                    });
+                }
+                
+            } catch (error) {
+                console.log("Error fetching data", error)
+            }
+        }
+        fetchData()
+    }, [])
 
     return (
         <>

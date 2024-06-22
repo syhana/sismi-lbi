@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TabelAction from "./tableAction";
 import AlertNotif from "../alert/AlertNotif";
-import Badges from "../badges/badges";  // Assuming Badges is in the same directory, adjust the path if needed
+import Badges from "../badges/badges";  
+import DeleteMyDisposisi from "../../api/Asisten/My Disposisi/DeleteMyDisposisi";
 
 export default function TabelMyDisposisi({ className, data, columns, bg_head, onEdit }) {
   const navigate = useNavigate();
@@ -15,9 +16,15 @@ export default function TabelMyDisposisi({ className, data, columns, bg_head, on
     setIsModalOpen(true);
   };
 
-  const handleDeleteConfirmation = () => {
-    console.log("Menghapus data dengan id:", posisToDelete);
+  const handleDeleteConfirmation = async () => {
     setIsModalOpen(false);
+    try {
+        await DeleteMyDisposisi(posisToDelete);
+        window.location.reload()
+    } catch (error) {
+        console.error("Error deleting akun:", error);
+
+    }
   };
 
   const handleCancelDelete = () => {
@@ -64,7 +71,7 @@ export default function TabelMyDisposisi({ className, data, columns, bg_head, on
               </td>
               <td className="p-2">
                 <TabelAction
-                  onEdit={() => navigate(`${onEdit}`)}
+                  onEdit={() => navigate(`${onEdit}/${row.id}`)}
                   onDelete={() => showDeleteConfirmation(row.id)}
                   showButtons={{ view: false, edit: true, delete: true }} 
                 />

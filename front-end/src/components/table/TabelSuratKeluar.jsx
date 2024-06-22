@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TabelAction from "./tableAction";
 import AlertNotif from "../alert/AlertNotif";
+import HapusSuratKeluar from "../../api/Asisten/Kelola Surat Keluar/HapusSuratKeluar";
 
 export default function TabelSuratKeluar({ className, data, columns, bg_head, onView, onEdit}) {
     const navigate = useNavigate();
@@ -13,9 +14,15 @@ export default function TabelSuratKeluar({ className, data, columns, bg_head, on
         setIsModalOpen(true); 
     };
 
-    const handleDeleteConfirmation = () => {
-        console.log("Menghapus data dengan id:", posisToDelete);
+    const handleDeleteConfirmation = async () => {
         setIsModalOpen(false);
+        try {
+            await HapusSuratKeluar(posisToDelete);
+            window.location.reload()
+        } catch (error) {
+            console.error("Error deleting akun:", error);
+
+        }
     };
 
     const handleCancelDelete = () => {
@@ -42,8 +49,8 @@ export default function TabelSuratKeluar({ className, data, columns, bg_head, on
                             <td className="p-2">{row.file_surat}</td>
                             <td className="p-2">
                                 <TabelAction
-                                    onView={() => navigate(`${onView}`)}
-                                    onEdit={() => navigate(`${onEdit}`)}
+                                    onView={() => navigate(`${onView}/${row.id}`)}
+                                    onEdit={() => navigate(`${onEdit}/${row.id}`)}
                                     onDelete={() => showDeleteConfirmation(row.id)}
                                 />
                             </td>

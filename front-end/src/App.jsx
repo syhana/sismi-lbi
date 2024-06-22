@@ -94,20 +94,20 @@ function App() {
         <Route path='/loginAsisten' element={<LoginAsisten/>}/>
         <Route path='/asisten/suratMasuk' element={<SuratMasuk/>}/>
         <Route path='/asisten/suratMasuk/tambah' element={<TambahSuratMasuk/>}/>
-        <Route path='/asisten/suratMasuk/detail' element={<DetailSuratMasuk/>}/>
-        <Route path='/asisten/suratMasuk/edit' element={<EditSuratMasuk/>}/>
+        <Route path='/asisten/suratMasuk/detail/:no_surat_masuk' element={<DetailSuratMasuk/>}/>
+        <Route path='/asisten/suratMasuk/edit/:no_surat_masuk' element={<EditSuratMasuk/>}/>
 
         <Route path='/asisten/suratKeluar' element={<SuratKeluar/>}/>
         <Route path='/asisten/suratKeluar/tambah' element={<TambahSuratKeluar/>}/>
-        <Route path='/asisten/suratKeluar/Edit' element={<EditSuratKeluar/>}/>
-        <Route path='/asisten/suratKeluar/detail' element={<DetailSuratKeluar/>}/>
+        <Route path='/asisten/suratKeluar/edit/:no_surat_keluar' element={<EditSuratKeluar/>}/>
+        <Route path='/asisten/suratKeluar/detail/:no_surat_keluar' element={<DetailSuratKeluar/>}/>
 
         <Route path='/asisten/disposisiSurat' element={<DisposisiSuratAsisten/>}/>
-        <Route path='/asisten/disposisiSurat/detail' element={<DetailDisposisiAsiten/>}/>
+        <Route path='/asisten/disposisiSurat/detail/:id_disposisi' element={<DetailDisposisiAsiten/>}/>
 
         <Route path='/asisten/disposisiSurat/myDisposisi' element={<MyDisposisi/>}/>
         <Route path='/asisten/disposisiSurat/myDisposisi/tambah' element={<TambahMyDisposisi/>}/>
-        <Route path='/asisten/disposisiSurat/myDisposisi/edit' element={<EditMyDisposisi/>}/>
+        <Route path='/asisten/disposisiSurat/myDisposisi/edit/:id_disposisi' element={<EditMyDisposisi/>}/>
 
         <Route path='/asisten/profile' element={<ProfileAsisten/>}/>
 

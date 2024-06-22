@@ -34,7 +34,7 @@ const InputFile = ({ label, onChange, placeholder, className}) => {
           className="opacity-0 absolute inset-0 w-full h-full cursor-pointer"
           ref={inputRef}
           onChange={handleFileChange}
-          accept="image/png"
+          accept="image/png, application/pdf"
         />
         <input
           className={`block w-full rounded-r-md border-0 py-4 pl-4 pr-16 text-gray-900 ring-1 ring-inset ring-custom-200 placeholder:text-gray-300 font-semibold ${

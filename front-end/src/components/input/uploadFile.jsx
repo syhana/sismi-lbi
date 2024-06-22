@@ -64,16 +64,17 @@ const Container = styled.section`
   }
 `;
 
-function Previews({props, icon, label, classLabel}) {
+function Previews({ onFileChange, icon, label, classLabel }) {
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/*': []
+      'application/pdf': []
     },
     onDrop: acceptedFiles => {
       setFiles(acceptedFiles.map(file => Object.assign(file, {
         preview: URL.createObjectURL(file)
       })));
+      onFileChange(acceptedFiles[0]); // Panggil onFileChange dengan file pertama
     }
   });
 

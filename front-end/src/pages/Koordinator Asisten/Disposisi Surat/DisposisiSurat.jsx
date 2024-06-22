@@ -14,7 +14,7 @@ export default function DisposisiSuratKoor (){
       }, [navigate]); 
     return (
         <>
-        <SidebarKoor nama_koor={'Nadini Annisa Byant'} profile={'/koor/profile'}>
+        <SidebarKoor nama_koor={'Koordinator Asisten'} profile={'/koor/profile'}>
             <DisposisiSuratContent/>
         </SidebarKoor>
         </>

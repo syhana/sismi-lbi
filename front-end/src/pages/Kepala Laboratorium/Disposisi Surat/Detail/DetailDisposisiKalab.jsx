@@ -17,7 +17,7 @@ export default function DetailDisposisiKalab (){
 
     return (
         <>
-        <SidebarKalab profile={'/kalab/profile'} nama_kalab={'Nadini Annisa Byant'}>
+        <SidebarKalab profile={'/kalab/profile'} nama_kalab={'Kepala Laboratorium'}>
             <div className="p-10 ps-12">
                     <p className="text-primary font-bold text-3xl">Lihat Surat</p>
                     <p className="pt-5 text-secondary font-bold  text-lg">File Surat (<span className="text-red">.pdf</span>)</p>
