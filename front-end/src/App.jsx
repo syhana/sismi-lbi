@@ -77,9 +77,9 @@ function App() {
         <Route path='/loginMahasiswa' element={<LoginMahasiswa/>}/>
         
         <Route path='/mahasiswa/generateSurat' element={<GenerateSurat/>}/>
-        <Route path='/mahasiswa/generateSurat/pinjamBarang' element={<PeminjamanBarang/>}/>
-        <Route path='/mahasiswa/generateSurat/pinjamRuang' element={<PeminjamanRuangan/>}/>
-        <Route path='/mahasiswa/generateSurat/permohonanTA' element={<PermohonanTA/>}/>
+        <Route path='/mahasiswa/generateSurat/pinjamBarang/:idJenis' element={<PeminjamanBarang/>}/>
+        <Route path='/mahasiswa/generateSurat/pinjamRuang/:idJenis' element={<PeminjamanRuangan/>}/>
+        <Route path='/mahasiswa/generateSurat/permohonanTA/:idJenis' element={<PermohonanTA/>}/>
 
         <Route path='/mahasiswa/kelolaSurat' element={<KelolaSurat/>}/>
         <Route path='/mahasiswa/kelolaSurat/tambah' element={<TambahSurat/>}/>
