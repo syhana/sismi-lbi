@@ -1,6 +1,9 @@
 const modelDisposisiSurat = require('../../models/disposisi_surat')
 const modelSuratMahasiswa = require('../../models/surat_mahasiswa')
 const modelMahasiswa = require('../../models/mahasiswa')
+const modelSuratKeluar = require('../../models/surat_keluar')
+const modelAsisten = require('../../models/asisten')
+
 const { Op } = require('sequelize');
 
 //tampil seluruh data disposisi (hanya yang dari mahasiswa)
@@ -8,9 +11,14 @@ const dataDisposisi = async (req,res) => {
     try {
         const findData = await modelDisposisiSurat.findAll({
             where: {
-                id_surat_mahasiswa: {
-                    [Op.ne]: null
-                }
+                [Op.or]: {
+                    id_surat_mahasiswa: {
+                        [Op.ne]: null
+                    },
+                    no_surat_keluar: {
+                        [Op.ne]: null
+                    }
+                }  
             },
             include: [
                 {
@@ -22,6 +30,18 @@ const dataDisposisi = async (req,res) => {
                     model: modelMahasiswa,
                     as: 'dataDisposisiPemberi',
                     attributes: ['nama_mahasiswa']
+                },
+                {
+                    model: modelSuratKeluar,
+                    as: 'dataSuratKeluar',
+                    attributes: ['no_surat_keluar', 'file_surat_keluar'],
+                    include: [
+                        {
+                            model: modelAsisten,
+                            as: 'dataAsisten',
+                            attributes: ['nama_asisten']
+                        }
+                    ]
                 }
             ],
             attributes: ['id_disposisi', 'id_surat_mahasiswa', 'pemberi_disposisi_mahasiswa', 'status_disposisi']
@@ -119,9 +139,14 @@ const detailSurat = async (req,res) => {
                     model: modelSuratMahasiswa,
                     as: 'dataSuratMhs', 
                     attributes: ['nama_surat_mahasiswa','file_surat_mahasiswa']
+                },
+                {
+                    model: modelSuratKeluar,
+                    as: 'dataSuratKeluar',
+                    attributes: ['nama_surat_keluar', 'file_surat_keluar']
                 }
             ],
-            attributes: ['id_surat_mahasiswa']
+            attributes: ['id_surat_mahasiswa', 'no_surat_keluar', 'tujuan_disposisi']
         })
         if (!findDisposisi) {
             return res.status(400).json({success: false, message: 'Data disposisi surat tidak ditemukan'})

@@ -14,14 +14,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/fileSuratMahasiswa', express.static('public/doc/suratMahasiswa'))
-app.use('/fileSuratMasuk', express.static('public/Asisten/suratMasuk'))
-app.use('/fileSuratKeluar', express.static('public/Asisten/suratKeluar'))
-app.use('/ttd', express.static('public/images/ttd'))
-app.use(cors({
-  origin: 'http://localhost:5137'
-})) 
-
+app.use('/fileSuratMahasiswa', express.static(path.join(__dirname, 'public/doc/suratMahasiswa')));
+app.use('/fileSuratMasuk', express.static(path.join(__dirname, 'public/doc/Asisten/suratMasuk')));
+app.use('/fileSuratKeluar', express.static(path.join(__dirname, 'public/doc/Asisten/suratKeluar')));
+app.use('/ttd', express.static(path.join(__dirname, 'public/images/ttd')));
 
 
 app.use('/', server.admin)
@@ -66,11 +62,9 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
