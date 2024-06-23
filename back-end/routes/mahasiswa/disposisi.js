@@ -8,5 +8,6 @@ router.get('/dataSuratListMhs', middleware.verifyTokenMahasiswa, controllers.dat
 router.post('/tambahDisposisiMhs', middleware.verifyTokenMahasiswa, controllers.tambahDisposisi)
 router.post('/editDisposisiMhs/:id_disposisi', middleware.verifyTokenMahasiswa, controllers.editDisposisi)
 router.delete('/hapusDisposisiMhs/:id_disposisi', middleware.verifyTokenMahasiswa, controllers.hapusDiposisi)
+router.get('/detailDisposisiMhs/:id_disposisi', middleware.verifyTokenMahasiswa, controllers.detailDisposisi)
 
 module.exports = router

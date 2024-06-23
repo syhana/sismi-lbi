@@ -16,7 +16,7 @@ const dataDisposisi = async (req,res) => {
                     as: 'dataSuratMhs'
                 }
             ],
-            attributes: ['id_disposisi', 'tujuan_disposisi']
+            attributes: ['id_disposisi', 'tujuan_disposisi', 'status_disposisi']
         })
         if (findData.length <= 0) {
             return res.status(400).json({success: false, message: 'Data disposisi tidak ditemukan'})
@@ -114,4 +114,27 @@ const hapusDiposisi = async(req,res) => {
     }
 }
 
-module.exports = {dataDisposisi, dataSuratMhs, tambahDisposisi, editDisposisi, hapusDiposisi}
+const detailDisposisi = async (req,res) => {
+    try {
+        const {id_disposisi} = req.params
+        const findDetail = await modelDisposisiSurat.findByPk(id_disposisi, {
+            include: [
+                {
+                    model: modelSuratMahasiswa,
+                    attributes: ['id_surat_mahasiswa', 'nama_surat_mahasiswa'],
+                    as: 'dataSuratMhs'
+                }
+            ],
+            attributes: ['id_disposisi', 'tujuan_disposisi', 'status_disposisi']
+        })
+        if (!findDetail) {
+            return res.status(400).json({success: false, message: 'Data disposisi tidak ditemukan'})
+        }
+        return res.status(200).json({success: true, message: 'Data disposisi ditemukan', data: findDetail})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({success: false, message: 'Kesalahan Server'})
+    }
+}
+
+module.exports = {dataDisposisi, dataSuratMhs, tambahDisposisi, editDisposisi, hapusDiposisi, detailDisposisi}
