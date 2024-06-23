@@ -64,7 +64,7 @@ export default function TabelDisposisiMhs({ className, data, columns, bg_head, o
               </td>
               <td className="p-2">
                 <TabelAction
-                  onEdit={() => navigate(`${onEdit}`)}
+                  onEdit={() => navigate(`${onEdit}/${row.id}`)}
                   onDelete={() => showDeleteConfirmation(row.id)}
                   showButtons={{ view: false, edit: true, delete: true }} 
                 />

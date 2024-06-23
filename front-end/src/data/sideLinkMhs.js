@@ -14,4 +14,9 @@ export const sidebarDataMhs = [
         label: 'Disposisi Surat',
         link: '/mahasiswa/disposisiSurat'
     },
+    {
+        icon: '/logout.svg',
+        label: 'Log Out',
+        action: 'logout'
+    },
 ]

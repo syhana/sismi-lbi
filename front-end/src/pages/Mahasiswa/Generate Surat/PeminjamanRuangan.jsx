@@ -14,7 +14,7 @@ export default function PeminjamanRuangan(){
       }, [navigate]); 
     return (
         <>
-        <SidebarMhs nama_mahasiswa={'Nadini Annisa Byant'} profile={'/mahasiswa/profile'}>
+        <SidebarMhs nama_mahasiswa={'Mahasiswa'} profile={'/mahasiswa/profile'}>
             <FormPinjamRuang/>
         </SidebarMhs>
         </>

@@ -14,6 +14,11 @@ export const sideLinkKalab = [
         label: 'Laporan Surat Keluar',
         link: '/kalab/laporanSuratKeluar'
     },
+    {
+        icon: '/logout.svg',
+        label: 'Log Out',
+        action: 'logout'
+    },
     
 
 ]

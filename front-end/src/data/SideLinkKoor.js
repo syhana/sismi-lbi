@@ -4,5 +4,10 @@ export const sideLinkKoor = [
         label: 'Disposisi Surat',
         link: '/koor/disposisiSurat'
     },
+    {
+        icon: '/logout.svg',
+        label: 'Log Out',
+        action: 'logout'
+    },
     
 ]

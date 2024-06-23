@@ -22,7 +22,7 @@ export default function EditBarangContent () {
   const navigate = useNavigate();
   const {id_barang} = useParams();
   const [nama_barang, setNamaBarang] = useState('');
-  const [status_barang, setStatusBarang] = useState(data2[0].name); // Initialize with the name property
+  const [status_barang, setStatusBarang] = useState(data2[0].name);
   const [detail, setDetail] = useState(null);
 
   useEffect(() => {

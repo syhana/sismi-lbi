@@ -1,24 +1,51 @@
 import { useNavigate } from "react-router-dom";
 import ButtonIcon from '../../../components/button/buttonIcon'
 import Tabel from '../../../components/table/TabelSuratMhs'
-
-const data = [
-    { id: 1, nama_surat: "Surat Peminjaman Ruangan", file_surat: 'Surat_peminjaman_nadini.pdf'},
-    { id: 1, nama_surat: "Surat Peminjaman Ruangan", file_surat: 'Surat_peminjaman_nadini.pdf'},
-    { id: 1, nama_surat: "Surat Peminjaman Ruangan", file_surat: 'Surat_peminjaman_nadini.pdf'},
-    { id: 1, nama_surat: "Surat Peminjaman Ruangan", file_surat: 'Surat_peminjaman_nadini.pdf'},
-
-];
-
-const columns = [
-    { key: "no", label: "No" },
-    { key: "nama_surat", label: "Nama Surat" },
-    { key: "file_surat", label: "File Surat" },
-    { key: "action", label: "Aksi" },
-];
+import { useState, useEffect } from "react";
+import TampilSuratMhs from "../../../api/mahasiswa/Kelola Surat/TampilSuratMhs";
+import Swal from "sweetalert2";
 
 export default function KelolaSuratContent (){
+    const [data,setData] = useState([])    
+    const columns = [
+        { key: "no", label: "No" },
+        { key: "nama_surat", label: "Nama Surat" },
+        { key: "file_surat", label: "File Surat" },
+        { key: "action", label: "Aksi" },
+    ];
+
     const navigate = useNavigate();
+
+
+
+    useEffect(() => async () => {
+        const fetchData = async () => {
+            try {
+                const response = await TampilSuratMhs()
+                if (response.success) {
+                    const formattedData = response.data.map((item, index) => ({
+                        no: index + 1,
+                        nama_surat: item.nama_surat_mahasiswa,
+                        file_surat: item.file_surat_mahasiswa,
+                        id: item.id_surat_mahasiswa
+                    }))
+                    setData(formattedData)
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: response.message,
+                      });
+                }
+            } catch (error) {
+                console.log("Error fetching data", error)
+                Swal.fire({
+                    icon: 'error',
+                    text: error.message,
+                });
+            }
+        }
+        fetchData()
+    }, [])
 
     const handleTambahDataClick = () => {
         navigate("/mahasiswa/kelolaSurat/tambah");

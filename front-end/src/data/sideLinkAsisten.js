@@ -13,6 +13,11 @@ export const sideLinkAsisten = [
         icon:'/Icon sidebar/Asisten/disposisi.svg',
         label: 'Disposisi Surat',
         link: '/asisten/disposisiSurat'
-    }
+    },
+    {
+        icon: '/logout.svg',
+        label: 'Log Out',
+        action: 'logout'
+    },
 
 ]

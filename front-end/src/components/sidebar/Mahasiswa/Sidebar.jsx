@@ -15,6 +15,8 @@ import ListItemText from '@mui/material/ListItemText';
 import { sidebarDataMhs } from '../../../data/sideLinkMhs';
 import Tooltip from '@mui/material/Tooltip';
 import ActiveRoute from './ActiveRoute'
+import LogoutMahasiswa from "../../../api/mahasiswa/LogoutMahasiswa";
+import Swal from "sweetalert2";
 
 const drawerWidth = 368;
 
@@ -108,6 +110,18 @@ export default function SidebarMhs({children, profile, nama_mahasiswa}) {
     setOpen(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      await LogoutMahasiswa();
+    } catch (error) {
+      console.error('Logout failed:', error);
+      Swal.fire({
+        icon: 'error',
+        text: error.message,
+      });
+    }
+  };
+
   return (
     <Box sx={{ display: 'flex'}}>
       <CssBaseline />
@@ -123,41 +137,74 @@ export default function SidebarMhs({children, profile, nama_mahasiswa}) {
         </DrawerHeader>
         <List sx={{ padding: open ? 5 : 0 }}>
         <ListContainer>
-        {sidebarDataMhs.map((item,) => (
-          <ListItem key={item.label} disablePadding sx={{ display: 'block' }}>
-            <ActiveRoute to={item.link}>
-              <ListItemButton
-                sx={{
-                  minHeight: 50,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                  backgroundColor: 'inherit',
-                  color: 'white', 
-                  '&:hover': {
-                    backgroundColor: '#1B2E5F',
-                    color: 'white',
-                    fontWeight: 'bold'
-                  },
-                  marginBottom: 2,
-                  borderRadius: 4
-                }}
-              >
-                <Tooltip title={item.label} arrow>
-                  <ListItemIcon
+        {sidebarDataMhs.map((item) => (
+              <ListItem key={item.label} disablePadding sx={{ display: 'block' }}>
+                {item.action === 'logout' ? (
+                  <ListItemButton
                     sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
+                      minHeight: 50,
+                      justifyContent: open ? 'initial' : 'center',
+                      px: 2.5,
+                      backgroundColor: 'inherit',
+                      color: 'inherit',
+                      '&:hover': {
+                        backgroundColor: '#1B2E5F',
+                        color: 'black',
+                        fontWeight: 'bold'
+                      },
+                      marginBottom: 2,
+                      borderRadius: 4
                     }}
+                    onClick={() => handleLogout()} 
                   >
-                    <img src={item.icon} alt={item.label}/>
-                  </ListItemIcon>
-                </Tooltip>
-                <ListItemText primary={item.label} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ActiveRoute>
-          </ListItem>
-        ))}
+                    <Tooltip title={item.label} arrow>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <img src={item.icon} alt={item.label}/>
+                      </ListItemIcon>
+                    </Tooltip>
+                    <ListItemText primary={item.label} sx={{ opacity: open ? 1 : 0 }} />
+                  </ListItemButton>
+                ) : (
+                  <ActiveRoute to={item.link}>
+                    <ListItemButton
+                      sx={{
+                        minHeight: 50,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
+                        backgroundColor: 'inherit',
+                        color: 'inherit',
+                        '&:hover': {
+                          backgroundColor: '#1B2E5F',
+                          color: 'black',
+                          fontWeight: 'bold'
+                        },
+                        marginBottom: 2,
+                        borderRadius: 4
+                      }}
+                    >
+                      <Tooltip title={item.label} arrow>
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : 'auto',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <img src={item.icon} alt={item.label}/>
+                        </ListItemIcon>
+                      </Tooltip>
+                      <ListItemText primary={item.label} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                  </ActiveRoute>
+                )}
+              </ListItem>
+            ))}
       </ListContainer>
     </List>
 

@@ -15,7 +15,7 @@ export default function GenerateSurat(){
       
     return (
         <>
-        <SidebarMhs profile={'/mahasiswa/profile'} nama_mahasiswa={'Nadini Annisa Byant'}>
+        <SidebarMhs profile={'/mahasiswa/profile'} nama_mahasiswa={'Mahasiswa'}>
             <GenerateSuratContent/>
         </SidebarMhs>
         </>

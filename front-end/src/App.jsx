@@ -83,12 +83,12 @@ function App() {
 
         <Route path='/mahasiswa/kelolaSurat' element={<KelolaSurat/>}/>
         <Route path='/mahasiswa/kelolaSurat/tambah' element={<TambahSurat/>}/>
-        <Route path='/mahasiswa/kelolaSurat/edit' element={<EditSurat/>}/>
-        <Route path='/mahasiswa/kelolaSurat/detail' element={<DetailSurat/>}/>
+        <Route path='/mahasiswa/kelolaSurat/edit/:id_surat_mahasiswa' element={<EditSurat/>}/>
+        <Route path='/mahasiswa/kelolaSurat/detail/:id_surat_mahasiswa' element={<DetailSurat/>}/>
 
         <Route path='/mahasiswa/disposisiSurat' element={<DisposisiSurat/>}/>
         <Route path='/mahasiswa/disposisiSurat/tambah' element={<TambahDisposisi/>}/>
-        <Route path='/mahasiswa/disposisiSurat/Edit' element={<EditDisposisi/>}/>
+        <Route path='/mahasiswa/disposisiSurat/Edit/:id_disposisi' element={<EditDisposisi/>}/>
         <Route path='/mahasiswa/profile' element={<ProfileMhs/>}/>
 
         <Route path='/loginAsisten' element={<LoginAsisten/>}/>

@@ -23,8 +23,11 @@ export default function FormPermohonanTA (){
 
             Swal.fire({
                 icon: 'success',
-                text: 'Laporan berhasil diunduh',
+                text: 'Surat berhasil digenerate',
             });
+
+            navigate('/mahasiswa/generateSurat')
+
 
         } catch (error) {
             console.log(error);

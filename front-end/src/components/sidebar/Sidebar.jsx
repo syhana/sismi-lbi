@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { styled, useTheme } from '@mui/material/styles';
+import React, { useState } from "react"; // Pastikan Anda mengimport useState dari 'react'
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -14,7 +14,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { sidebarData } from '../../data/sidelink';
 import Tooltip from '@mui/material/Tooltip';
-import ActiveRoute from './ActiveRoute'
+import ActiveRoute from './ActiveRoute';
+import LogoutAdmin from "../../api/admin/LogoutAdmin";
+import Swal from "sweetalert2";
 
 const drawerWidth = 368;
 
@@ -97,9 +99,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-// eslint-disable-next-line react/prop-types
-export default function MiniDrawer({children, profile}) {
-  const [open, setOpen] = React.useState(false);
+const MiniDrawer = ({ children, profile }) => {
+  const [open, setOpen] = useState(false); 
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -109,59 +110,101 @@ export default function MiniDrawer({children, profile}) {
     setOpen(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      await LogoutAdmin();
+    } catch (error) {
+      console.error('Logout failed:', error);
+      Swal.fire({
+        icon: 'error',
+        text: error.message,
+      });
+    }
+  };
+
   return (
     <Box sx={{ display: 'flex'}}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} elevation={0}>
-</AppBar>
+      <AppBar position="fixed" open={open} elevation={0} />
       <Drawer variant="permanent" open={open}>
         <DrawerHeader className="mt-20 ms-10 me-10">
-            <img src="/public/logo-sismi.svg" alt="" />
-            {/* <p className="font-extrabold text-xl" style={{margin: 'auto'}}>Dashboard</p> */}
-        <IconButton sx={{marginLeft: 2}} onClick={open ? handleDrawerClose : handleDrawerOpen}>
-          {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-        </IconButton>
+          <img src="/public/logo-sismi.svg" alt="" />
+          <IconButton sx={{marginLeft: 2}} onClick={open ? handleDrawerClose : handleDrawerOpen}>
+            {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
         </DrawerHeader>
         <List sx={{ padding: open ? 5 : 0 }}>
-        <ListContainer>
-        {sidebarData.map((item,) => (
-          <ListItem key={item.label} disablePadding sx={{ display: 'block' }}>
-            <ActiveRoute to={item.link}>
-              <ListItemButton
-                sx={{
-                  minHeight: 50,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                  backgroundColor: 'inherit',
-                  color: 'inherit', 
-                  '&:hover': {
-                    backgroundColor: '#1B2E5F',
-                    color: 'black',
-                    fontWeight: 'bold'
-                  },
-                  marginBottom: 2,
-                  borderRadius: 4
-                }}
-              >
-                <Tooltip title={item.label} arrow>
-                  <ListItemIcon
+          <ListContainer>
+            {sidebarData.map((item) => (
+              <ListItem key={item.label} disablePadding sx={{ display: 'block' }}>
+                {item.action === 'logout' ? (
+                  <ListItemButton
                     sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
+                      minHeight: 50,
+                      justifyContent: open ? 'initial' : 'center',
+                      px: 2.5,
+                      backgroundColor: 'inherit',
+                      color: 'inherit',
+                      '&:hover': {
+                        backgroundColor: '#1B2E5F',
+                        color: 'black',
+                        fontWeight: 'bold'
+                      },
+                      marginBottom: 2,
+                      borderRadius: 4
                     }}
+                    onClick={() => handleLogout()} 
                   >
-                    <img src={item.icon} alt={item.label}/>
-                  </ListItemIcon>
-                </Tooltip>
-                <ListItemText primary={item.label} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ActiveRoute>
-          </ListItem>
-        ))}
-      </ListContainer>
-    </List>
-
+                    <Tooltip title={item.label} arrow>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <img src={item.icon} alt={item.label}/>
+                      </ListItemIcon>
+                    </Tooltip>
+                    <ListItemText primary={item.label} sx={{ opacity: open ? 1 : 0 }} />
+                  </ListItemButton>
+                ) : (
+                  <ActiveRoute to={item.link}>
+                    <ListItemButton
+                      sx={{
+                        minHeight: 50,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
+                        backgroundColor: 'inherit',
+                        color: 'inherit',
+                        '&:hover': {
+                          backgroundColor: '#1B2E5F',
+                          color: 'black',
+                          fontWeight: 'bold'
+                        },
+                        marginBottom: 2,
+                        borderRadius: 4
+                      }}
+                    >
+                      <Tooltip title={item.label} arrow>
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : 'auto',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <img src={item.icon} alt={item.label}/>
+                        </ListItemIcon>
+                      </Tooltip>
+                      <ListItemText primary={item.label} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                  </ActiveRoute>
+                )}
+              </ListItem>
+            ))}
+          </ListContainer>
+        </List>
       </Drawer>
       <Box
         component="main"
@@ -185,4 +228,6 @@ export default function MiniDrawer({children, profile}) {
       </Box>
     </Box>
   );
-}
+};
+
+export default MiniDrawer;

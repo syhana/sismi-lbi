@@ -42,7 +42,6 @@ export default function EditSuratMasuk (){
         fetchDetail();
       }, [no_surat_masuk]);
 
-      console.log(detail);
 
       if (!detail) {
         return <p>Loading...</p>;

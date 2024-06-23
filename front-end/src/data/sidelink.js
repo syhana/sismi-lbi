@@ -9,4 +9,9 @@ export const sidebarData = [
         label: 'Mengelola Barang',
         link: '/admin/kelolaBarang'
     },
+    {
+        icon: '/logout.svg',
+        label: 'Log Out',
+        action: 'logout'
+    },
 ]

@@ -15,6 +15,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { sideLinkKalab } from "../../../data/sideLinkKalab";
 import Tooltip from '@mui/material/Tooltip';
 import ActiveRoute from './ActiveRoute'
+import Swal from "sweetalert2";
+import LogoutKalab from "../../../api/Kepala Laboratorium/LogoutKalab";
+
 
 const drawerWidth = 368;
 
@@ -109,6 +112,18 @@ export default function SidebarKalab({children, profile, nama_kalab}) {
     setOpen(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      await LogoutKalab();
+    } catch (error) {
+      console.error('Logout failed:', error);
+      Swal.fire({
+        icon: 'error',
+        text: error.message,
+      });
+    }
+  };
+
   return (
     <Box sx={{ display: 'flex'}}>
       <CssBaseline />
@@ -124,41 +139,74 @@ export default function SidebarKalab({children, profile, nama_kalab}) {
         </DrawerHeader>
         <List sx={{ padding: open ? 5 : 0 }}>
         <ListContainer>
-        {sideLinkKalab.map((item,) => (
-          <ListItem key={item.label} disablePadding sx={{ display: 'block' }}>
-            <ActiveRoute to={item.link}>
-              <ListItemButton
-                sx={{
-                  minHeight: 50,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                  backgroundColor: 'inherit',
-                  color: 'inherit', 
-                  '&:hover': {
-                    backgroundColor: '#1B2E5F',
-                    color: 'black',
-                    fontWeight: 'bold'
-                  },
-                  marginBottom: 2,
-                  borderRadius: 4
-                }}
-              >
-                <Tooltip title={item.label} arrow>
-                  <ListItemIcon
+        {sideLinkKalab.map((item) => (
+              <ListItem key={item.label} disablePadding sx={{ display: 'block' }}>
+                {item.action === 'logout' ? (
+                  <ListItemButton
                     sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
+                      minHeight: 50,
+                      justifyContent: open ? 'initial' : 'center',
+                      px: 2.5,
+                      backgroundColor: 'inherit',
+                      color: 'inherit',
+                      '&:hover': {
+                        backgroundColor: '#1B2E5F',
+                        color: 'black',
+                        fontWeight: 'bold'
+                      },
+                      marginBottom: 2,
+                      borderRadius: 4
                     }}
+                    onClick={() => handleLogout()} 
                   >
-                    <img src={item.icon} alt={item.label}/>
-                  </ListItemIcon>
-                </Tooltip>
-                <ListItemText primary={item.label} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ActiveRoute>
-          </ListItem>
-        ))}
+                    <Tooltip title={item.label} arrow>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <img src={item.icon} alt={item.label}/>
+                      </ListItemIcon>
+                    </Tooltip>
+                    <ListItemText primary={item.label} sx={{ opacity: open ? 1 : 0 }} />
+                  </ListItemButton>
+                ) : (
+                  <ActiveRoute to={item.link}>
+                    <ListItemButton
+                      sx={{
+                        minHeight: 50,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
+                        backgroundColor: 'inherit',
+                        color: 'inherit',
+                        '&:hover': {
+                          backgroundColor: '#1B2E5F',
+                          color: 'black',
+                          fontWeight: 'bold'
+                        },
+                        marginBottom: 2,
+                        borderRadius: 4
+                      }}
+                    >
+                      <Tooltip title={item.label} arrow>
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : 'auto',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <img src={item.icon} alt={item.label}/>
+                        </ListItemIcon>
+                      </Tooltip>
+                      <ListItemText primary={item.label} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                  </ActiveRoute>
+                )}
+              </ListItem>
+            ))}
       </ListContainer>
     </List>
 
