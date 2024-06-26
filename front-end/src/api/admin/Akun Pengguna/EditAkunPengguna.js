@@ -20,7 +20,7 @@ export default async function (nama_baru, password, role, file, nama){
     }
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}editPengguna/${nama}`, requestOptions)
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/editPengguna/${nama}`, requestOptions)
         const result = await response.json()
         return result
     } catch (error) {
