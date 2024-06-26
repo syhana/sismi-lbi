@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TabelAction from "./tableAction";
 import AlertNotif from "../alert/AlertNotif";
-import Badges from "../badges/badges";  // Assuming Badges is in the same directory, adjust the path if needed
+import Badges from "../badges/badges";  
+import HapusDisposisi from "../../api/mahasiswa/Disposisi Surat/HapusDisposisi";
 
 export default function TabelDisposisiMhs({ className, data, columns, bg_head, onEdit }) {
   const navigate = useNavigate();
@@ -15,9 +16,15 @@ export default function TabelDisposisiMhs({ className, data, columns, bg_head, o
     setIsModalOpen(true);
   };
 
-  const handleDeleteConfirmation = () => {
-    console.log("Menghapus data dengan id:", posisToDelete);
+  const handleDeleteConfirmation = async () => {
     setIsModalOpen(false);
+    try {
+        await HapusDisposisi(posisToDelete);
+        window.location.reload()
+    } catch (error) {
+        console.error("Error deleting akun:", error);
+
+    }
   };
 
   const handleCancelDelete = () => {
