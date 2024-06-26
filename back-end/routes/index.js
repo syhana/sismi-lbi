@@ -1,0 +1,47 @@
+const admin = require('./admin/admin')
+const akunPengguna = require('./admin/akunPengguna')
+const barang = require('./admin/barang')
+const profileAdmin = require('./admin/profile')
+const mahasiswa = require('./mahasiswa/mahasiswa')
+const generateSurat = require('./mahasiswa/generateSurat')
+const kelolaSuratMhs = require('./mahasiswa/kelolaSurat')
+const disposisiMhs = require('./mahasiswa/disposisi')
+const profileMhs = require('./mahasiswa/profile')
+const asisten = require('./asisten/asisten')
+const suratMasukAsisten = require('./asisten/kelolaSuratMasuk')
+const suratKeluarAsisten = require('./asisten/kelolaSuratKeluar')
+const disposisiSuratAsisten = require('./asisten/disposisiSurat')
+const myDisposisi = require('./asisten/myDisposisi')
+const profileAsisten = require('./asisten/profile')
+const DisposisiKordas = require('./koordinator asisten/disposisiSurat')
+const kalab = require('./kepala laboratorium/kalab')
+const disposisiKalab = require('./kepala laboratorium/disposisiSurat')
+const laporanSuratMasuk = require('./kepala laboratorium/laporanSuratMasuk')
+const laporanSuratKeluar = require('./kepala laboratorium/laporanSuratKeluar')
+const profileKalab = require('./kepala laboratorium/profile')
+const server = {}
+
+server.admin = admin
+server.akunPengguna = akunPengguna
+server.barang = barang
+server.profileAdmin = profileAdmin
+server.mahasiswa = mahasiswa
+server.generateSurat = generateSurat
+server.kelolaSuratMhs = kelolaSuratMhs
+server.disposisiMhs = disposisiMhs
+server.profileMhs = profileMhs
+server.asisten = asisten
+server.suratMasukAsisten = suratMasukAsisten
+server.suratKeluarAsisten = suratKeluarAsisten
+server.disposisiSuratAsisten = disposisiSuratAsisten
+server.myDisposisi = myDisposisi
+server.profileAsisten = profileAsisten
+server.DisposisiKordas = DisposisiKordas
+server.kalab = kalab
+server.disposisiKalab = disposisiKalab
+server.laporanSuratMasuk = laporanSuratMasuk
+server.laporanSuratKeluar = laporanSuratKeluar
+server.profileKalab = profileKalab
+
+
+module.exports = server
